@@ -4,8 +4,9 @@ Title: A set of functions for converting PfPR to attack-rate
 Version: 0.1.0
 Author: Austin Carter
 Maintainer: Austin Carter <aucarter@uw.edu>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: 
+    In order to facilitate improved investigation of local malaria risk, this package takes 
+    estimates of PfPR and malaria case management and generates estimates of attack-rate. 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

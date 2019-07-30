@@ -1,9 +1,20 @@
-
-## Pair of function for finding the maximum value of X and associated A
+#' Helper function for finding the maximum prevelance for a given model and set
+#' of paramaters
+#'
+#' @param A An attack-rate
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
 AR2PRopt <- function(A, PAR, Bfn) {
     AR2PR(A, PAR, Bfn)$X
 }
 
+#' Finds the maximum prevalence and associated attack-rate for a given model and
+#' set of parameters
+#'
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
 findAXmax <- function(PAR, Bfn) {
     opt <- stats::optimize(AR2PRopt, interval = c(0, 1), PAR, Bfn, maximum = T)
     A = opt$maximum
@@ -11,7 +22,14 @@ findAXmax <- function(PAR, Bfn) {
     return(list(A = A, X = X))
 }
 
-## Calculate equilibrium AR for a PR time-series
+#' Finds the equilibrium attack-rates for an input vector of prevalences,
+#' conditional on the chosen model and parameters
+#'
+#' @param X A vector of prevalence rates
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
+#' @param showMessages Controls whether or not the function prints messages
 PR2AReq <- function(X, PAR, Bfn, showMessages = F) {
     A1X <- AR2PR(1, PAR, Bfn)
     max <- findAXmax(PAR, Bfn)
