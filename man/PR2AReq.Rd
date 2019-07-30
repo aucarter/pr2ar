@@ -15,7 +15,7 @@ PR2AReq(X, PAR, Bfn, showMessages = F)
 \item{Bfn}{A function for building the matrix represention of the system of
 equations that update the state vector}
 
-\item{showMessages}{Controls whether or not the function prints messages}
+\item{showMessages}{Toggle for whether the function prints messages}
 }
 \description{
 Finds the equilibrium attack-rates for an input vector of prevalences,

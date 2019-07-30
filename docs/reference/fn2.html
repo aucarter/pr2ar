@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters — PR2AReq • pr2ar</title>
+<title>Helper objective function for finding a pair of optimal attack-rates for a
+given pair of starting prevalence rates when the model has an exposure class — fn2 • pr2ar</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +33,11 @@ conditional on the chosen model and parameters — PR2AReq • pr2ar</title>
 
 
 
-<meta property="og:title" content="Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters — PR2AReq" />
+<meta property="og:title" content="Helper objective function for finding a pair of optimal attack-rates for a
+given pair of starting prevalence rates when the model has an exposure class — fn2" />
 
-<meta property="og:description" content="Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters" />
+<meta property="og:description" content="Helper objective function for finding a pair of optimal attack-rates for a
+given pair of starting prevalence rates when the model has an exposure class" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,27 +113,27 @@ conditional on the chosen model and parameters" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters</h1>
+    <h1>Helper objective function for finding a pair of optimal attack-rates for a
+given pair of starting prevalence rates when the model has an exposure class</h1>
     
-    <div class="hidden name"><code>PR2AReq.Rd</code></div>
+    <div class="hidden name"><code>fn2.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters</p>
+    <p>Helper objective function for finding a pair of optimal attack-rates for a
+given pair of starting prevalence rates when the model has an exposure class</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>PR2AReq</span>(<span class='no'>X</span>, <span class='no'>PAR</span>, <span class='no'>Bfn</span>, <span class='kw'>showMessages</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+    <pre class="usage"><span class='fu'>fn2</span>(<span class='no'>params</span>, <span class='no'>PAR</span>, <span class='no'>Bfn</span>, <span class='no'>X</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>X</th>
-      <td><p>A vector of prevalence rates</p></td>
+      <th>params</th>
+      <td><p>A pair of attack-rates</p></td>
     </tr>
     <tr>
       <th>PAR</th>
@@ -145,8 +145,8 @@ conditional on the chosen model and parameters</p>
 equations that update the state vector</p></td>
     </tr>
     <tr>
-      <th>showMessages</th>
-      <td><p>Toggle for whether the function prints messages</p></td>
+      <th>X</th>
+      <td><p>A pair of prevalence rates</p></td>
     </tr>
     </table>
     

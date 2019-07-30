@@ -29,7 +29,7 @@ findAXmax <- function(PAR, Bfn) {
 #' @param PAR A set of model parameters
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
-#' @param showMessages Controls whether or not the function prints messages
+#' @param showMessages Toggle for whether the function prints messages
 PR2AReq <- function(X, PAR, Bfn, showMessages = F) {
     A1X <- AR2PR(1, PAR, Bfn)
     max <- findAXmax(PAR, Bfn)

@@ -1,4 +1,8 @@
-## Calculate equilibrium Y for a given A and model B
+#' Calculates the equilibrium Y for a given attack-rate and model
+#'
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
 findYeq <- function(PAR, Bfn) {
     B = Bfn(PAR)
     e = eigen(B)
@@ -7,7 +11,13 @@ findYeq <- function(PAR, Bfn) {
     return(Yeq)
 }
 
-## Calculate PR and C from input AR
+#' Calculate the prevalence rate and treatment rate for a given attack-rate,
+#' model, and set of model parameters
+#'
+#' @param A An attack-rate
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
 AR2PR <- function(A, PAR, Bfn) {
     D = makeD(PAR)
     PR = c()

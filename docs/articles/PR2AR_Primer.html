@@ -157,7 +157,7 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb1-18"><a href="#cb1-18"></a>    Yeq =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span>(first <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(first))</span>
 <span id="cb1-19"><a href="#cb1-19"></a>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(Yeq) </span>
 <span id="cb1-20"><a href="#cb1-20"></a>}</span>
-<span id="cb1-21"><a href="#cb1-21"></a>Yeq1 =<span class="st"> </span><span class="kw">findYeq</span>(PAR, makeB)</span>
+<span id="cb1-21"><a href="#cb1-21"></a>Yeq1 =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, makeB)</span>
 <span id="cb1-22"><a href="#cb1-22"></a>Yeq1</span>
 <span id="cb1-23"><a href="#cb1-23"></a><span class="co">#&gt; [1] 0.3050417 0.6949583</span></span>
 <span id="cb1-24"><a href="#cb1-24"></a></span>
@@ -175,7 +175,7 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb1-36"><a href="#cb1-36"></a><span class="co">#&gt; [1] 0.3050417 0.6949583</span></span>
 <span id="cb1-37"><a href="#cb1-37"></a></span>
 <span id="cb1-38"><a href="#cb1-38"></a><span class="co"># Confirm steady state</span></span>
-<span id="cb1-39"><a href="#cb1-39"></a>B =<span class="st"> </span><span class="kw">makeB</span>(PAR)</span>
+<span id="cb1-39"><a href="#cb1-39"></a>B =<span class="st"> </span><span class="kw"><a href="../reference/makeB.html">makeB</a></span>(PAR)</span>
 <span id="cb1-40"><a href="#cb1-40"></a><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(B <span class="op">%*%</span><span class="st"> </span>Yeq1 <span class="op">-</span><span class="st"> </span>Yeq1)</span>
 <span id="cb1-41"><a href="#cb1-41"></a><span class="co">#&gt; [1] 0</span></span>
 <span id="cb1-42"><a href="#cb1-42"></a><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(B <span class="op">%*%</span><span class="st"> </span>Yeq2 <span class="op">-</span><span class="st"> </span>Yeq2)</span>
@@ -187,7 +187,7 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb1-48"><a href="#cb1-48"></a>    <span class="cf">for</span>(Ai <span class="cf">in</span> A) {</span>
 <span id="cb1-49"><a href="#cb1-49"></a>        PAR<span class="op">$</span>A =<span class="st"> </span>Ai</span>
 <span id="cb1-50"><a href="#cb1-50"></a>        <span class="cf">if</span>(eigen) {</span>
-<span id="cb1-51"><a href="#cb1-51"></a>            PRi =<span class="st"> </span><span class="kw">findYeq</span>(PAR, Bfn)[<span class="dv">2</span>]</span>
+<span id="cb1-51"><a href="#cb1-51"></a>            PRi =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, Bfn)[<span class="dv">2</span>]</span>
 <span id="cb1-52"><a href="#cb1-52"></a>        } <span class="cf">else</span> {</span>
 <span id="cb1-53"><a href="#cb1-53"></a>            PRi =<span class="st"> </span><span class="kw">algebYeq</span>(PAR)[<span class="dv">2</span>]</span>
 <span id="cb1-54"><a href="#cb1-54"></a>        }</span>
@@ -198,7 +198,7 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb1-59"><a href="#cb1-59"></a></span>
 <span id="cb1-60"><a href="#cb1-60"></a><span class="co"># Plot</span></span>
 <span id="cb1-61"><a href="#cb1-61"></a>A =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>)</span>
-<span id="cb1-62"><a href="#cb1-62"></a>X =<span class="st"> </span><span class="kw">AR2PR</span>(A, PAR, makeB)</span>
+<span id="cb1-62"><a href="#cb1-62"></a>X =<span class="st"> </span><span class="kw"><a href="../reference/AR2PR.html">AR2PR</a></span>(A, PAR, makeB)</span>
 <span id="cb1-63"><a href="#cb1-63"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(A, X, <span class="dt">type =</span> <span class="st">"l"</span>)</span></code></pre></div>
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a></span>
@@ -206,7 +206,7 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co"># optimize function</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>X =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">0.6</span>)</span>
 <span id="cb2-5"><a href="#cb2-5"></a>fn &lt;-<span class="st"> </span><span class="cf">function</span>(A, PAR, Bfn, X) {</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    PR =<span class="st"> </span><span class="kw">AR2PR</span>(A, PAR, Bfn)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    PR =<span class="st"> </span><span class="kw"><a href="../reference/AR2PR.html">AR2PR</a></span>(A, PAR, Bfn)</span>
 <span id="cb2-7"><a href="#cb2-7"></a>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(X <span class="op">-</span><span class="st"> </span>PR))</span>
 <span id="cb2-8"><a href="#cb2-8"></a>}</span>
 <span id="cb2-9"><a href="#cb2-9"></a>optimA &lt;-<span class="st"> </span><span class="cf">function</span>(X, PAR, Bfn) {</span>
@@ -217,7 +217,7 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb2-14"><a href="#cb2-14"></a>    }</span>
 <span id="cb2-15"><a href="#cb2-15"></a>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(A)   </span>
 <span id="cb2-16"><a href="#cb2-16"></a>}</span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">optimA</span>(X, PAR, makeB)</span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="kw"><a href="../reference/optimA.html">optimA</a></span>(X, PAR, makeB)</span>
 <span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; [1] 0.04648978 0.06817784</span></span>
 <span id="cb2-19"><a href="#cb2-19"></a></span>
 <span id="cb2-20"><a href="#cb2-20"></a><span class="co"># Algebraic solution</span></span>
@@ -230,7 +230,7 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb2-27"><a href="#cb2-27"></a><span class="co">#&gt; [1] 0.04650262 0.06816891</span></span>
 <span id="cb2-28"><a href="#cb2-28"></a><span class="co">## Make plots</span></span>
 <span id="cb2-29"><a href="#cb2-29"></a>X =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.05</span>)</span>
-<span id="cb2-30"><a href="#cb2-30"></a>A1 &lt;-<span class="st"> </span><span class="kw">optimA</span>(X, PAR, makeB)</span>
+<span id="cb2-30"><a href="#cb2-30"></a>A1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/optimA.html">optimA</a></span>(X, PAR, makeB)</span>
 <span id="cb2-31"><a href="#cb2-31"></a>A2 &lt;-<span class="st"> </span><span class="kw">algebA</span>(X, PAR)</span>
 <span id="cb2-32"><a href="#cb2-32"></a><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(X, A1, <span class="dt">ylab =</span> <span class="st">"A"</span>)</span>
 <span id="cb2-33"><a href="#cb2-33"></a><span class="kw"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span>(X, A2)</span></code></pre></div>
@@ -239,7 +239,7 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb3-2"><a href="#cb3-2"></a><span class="co"># Convert PR to attack-rate</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>PR2AReq &lt;-<span class="st"> </span><span class="cf">function</span>(X, PAR, Bfn, <span class="dt">optim =</span> T) {</span>
 <span id="cb3-4"><a href="#cb3-4"></a>    <span class="cf">if</span>(optim) {</span>
-<span id="cb3-5"><a href="#cb3-5"></a>        AR =<span class="st"> </span><span class="kw">optimA</span>(X, PAR, Bfn)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>        AR =<span class="st"> </span><span class="kw"><a href="../reference/optimA.html">optimA</a></span>(X, PAR, Bfn)</span>
 <span id="cb3-6"><a href="#cb3-6"></a>    } <span class="cf">else</span> {</span>
 <span id="cb3-7"><a href="#cb3-7"></a>        AR =<span class="st"> </span><span class="kw">algebA</span>(X, PAR)</span>
 <span id="cb3-8"><a href="#cb3-8"></a>    }</span>
@@ -263,19 +263,19 @@ X\\
 <span id="cb4-2"><a href="#cb4-2"></a>D =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
 <span id="cb4-3"><a href="#cb4-3"></a>X =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.01</span>), <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0.59</span>, <span class="fl">0.3</span>, <span class="fl">-0.01</span>))</span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Find steady state values for X</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>steadyA =<span class="st"> </span><span class="kw">optimA</span>(X, PAR, makeB)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>steadyA =<span class="st"> </span><span class="kw"><a href="../reference/optimA.html">optimA</a></span>(X, PAR, makeB)</span>
 <span id="cb4-6"><a href="#cb4-6"></a></span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="co"># Generate W and V matrices</span></span>
 <span id="cb4-8"><a href="#cb4-8"></a>makeW &lt;-<span class="st"> </span><span class="cf">function</span>(PAR) {</span>
 <span id="cb4-9"><a href="#cb4-9"></a>    Q =<span class="st"> </span>PAR<span class="op">$</span>Q</span>
 <span id="cb4-10"><a href="#cb4-10"></a>    <span class="kw"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Q), (<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Q)))</span>
 <span id="cb4-11"><a href="#cb4-11"></a>}</span>
-<span id="cb4-12"><a href="#cb4-12"></a>W =<span class="st"> </span><span class="kw">makeW</span>(PAR)</span>
+<span id="cb4-12"><a href="#cb4-12"></a>W =<span class="st"> </span><span class="kw"><a href="../reference/makeW.html">makeW</a></span>(PAR)</span>
 <span id="cb4-13"><a href="#cb4-13"></a>makeV &lt;-<span class="st"> </span><span class="cf">function</span>(PAR) {</span>
 <span id="cb4-14"><a href="#cb4-14"></a>    Q =<span class="st"> </span>PAR<span class="op">$</span>Q</span>
 <span id="cb4-15"><a href="#cb4-15"></a>    <span class="kw"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">0</span>), <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Q, Q))</span>
 <span id="cb4-16"><a href="#cb4-16"></a>}</span>
-<span id="cb4-17"><a href="#cb4-17"></a>V =<span class="st"> </span><span class="kw">makeV</span>(PAR)</span>
+<span id="cb4-17"><a href="#cb4-17"></a>V =<span class="st"> </span><span class="kw"><a href="../reference/makeV.html">makeV</a></span>(PAR)</span>
 <span id="cb4-18"><a href="#cb4-18"></a></span>
 <span id="cb4-19"><a href="#cb4-19"></a><span class="co"># Set up equilibrium start values</span></span>
 <span id="cb4-20"><a href="#cb4-20"></a>forwardA =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(steadyA[<span class="dv">1</span>])</span>
@@ -283,7 +283,7 @@ X\\
 <span id="cb4-22"><a href="#cb4-22"></a><span class="co"># Simulate forward</span></span>
 <span id="cb4-23"><a href="#cb4-23"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(X)) {</span>
 <span id="cb4-24"><a href="#cb4-24"></a>    forwardA[i] =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>((X[i] <span class="op">-</span><span class="st"> </span>D<span class="op">%*%</span>V<span class="op">%*%</span>Y) <span class="op">/</span><span class="st"> </span>(D<span class="op">%*%</span>W<span class="op">%*%</span>Y))</span>
-<span id="cb4-25"><a href="#cb4-25"></a>    B =<span class="st"> </span><span class="kw">makeB</span>(PAR)</span>
+<span id="cb4-25"><a href="#cb4-25"></a>    B =<span class="st"> </span><span class="kw"><a href="../reference/makeB.html">makeB</a></span>(PAR)</span>
 <span id="cb4-26"><a href="#cb4-26"></a>    Y =<span class="st"> </span>B<span class="op">%*%</span>Y</span>
 <span id="cb4-27"><a href="#cb4-27"></a>}</span>
 <span id="cb4-28"><a href="#cb4-28"></a> </span>
@@ -332,14 +332,14 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb5-8"><a href="#cb5-8"></a>          <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>d)<span class="op">*</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>A<span class="op">*</span>rho)<span class="op">*</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>Q), (<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>d)<span class="op">*</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>A<span class="op">*</span>rho)<span class="op">*</span>Q, d <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>d)<span class="op">*</span>rho<span class="op">*</span>A),</span>
 <span id="cb5-9"><a href="#cb5-9"></a>          <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>d, <span class="dv">0</span>, d))</span>
 <span id="cb5-10"><a href="#cb5-10"></a>}</span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="kw"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span>(<span class="kw">makeBdrugs</span>(PAR))</span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="kw"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span>(<span class="kw"><a href="../reference/makeBdrugs.html">makeBdrugs</a></span>(PAR))</span>
 <span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; [1] 1 1 1</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a>Yeq =<span class="st"> </span><span class="kw">findYeq</span>(PAR, makeBdrugs)</span>
+<span id="cb5-13"><a href="#cb5-13"></a>Yeq =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, makeBdrugs)</span>
 <span id="cb5-14"><a href="#cb5-14"></a>Yeq</span>
 <span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; [1] 0.89224423 0.05710104 0.05065473</span></span>
 <span id="cb5-16"><a href="#cb5-16"></a></span>
 <span id="cb5-17"><a href="#cb5-17"></a><span class="co"># Confirm steady state</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a>B =<span class="st"> </span><span class="kw">makeBdrugs</span>(PAR)</span>
+<span id="cb5-18"><a href="#cb5-18"></a>B =<span class="st"> </span><span class="kw"><a href="../reference/makeBdrugs.html">makeBdrugs</a></span>(PAR)</span>
 <span id="cb5-19"><a href="#cb5-19"></a><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(B <span class="op">%*%</span><span class="st"> </span>Yeq <span class="op">-</span><span class="st"> </span>Yeq)</span>
 <span id="cb5-20"><a href="#cb5-20"></a><span class="co">#&gt; [1] 5.551115e-17</span></span>
 <span id="cb5-21"><a href="#cb5-21"></a></span>
@@ -358,7 +358,7 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb6-5"><a href="#cb6-5"></a>    <span class="cf">for</span>(Ai <span class="cf">in</span> A) {</span>
 <span id="cb6-6"><a href="#cb6-6"></a>        PAR<span class="op">$</span>A =<span class="st"> </span>Ai</span>
 <span id="cb6-7"><a href="#cb6-7"></a>        <span class="cf">if</span>(eigen) {</span>
-<span id="cb6-8"><a href="#cb6-8"></a>            eq =<span class="st"> </span><span class="kw">findYeq</span>(PAR, Bfn)</span>
+<span id="cb6-8"><a href="#cb6-8"></a>            eq =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, Bfn)</span>
 <span id="cb6-9"><a href="#cb6-9"></a>        } <span class="cf">else</span> {</span>
 <span id="cb6-10"><a href="#cb6-10"></a>            eq =<span class="st"> </span><span class="kw">algebYeq</span>(PAR)</span>
 <span id="cb6-11"><a href="#cb6-11"></a>        }</span>
@@ -388,7 +388,7 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb6-35"><a href="#cb6-35"></a>  dt &lt;-<span class="st"> </span><span class="kw">data.table</span>()</span>
 <span id="cb6-36"><a href="#cb6-36"></a>  <span class="cf">for</span>(rho_i <span class="cf">in</span> rho) {</span>
 <span id="cb6-37"><a href="#cb6-37"></a>    PAR<span class="op">$</span>rho &lt;-<span class="st"> </span>rho_i</span>
-<span id="cb6-38"><a href="#cb6-38"></a>    PR &lt;-<span class="st"> </span><span class="kw">AR2PR</span>(AR, PAR, Bfn)</span>
+<span id="cb6-38"><a href="#cb6-38"></a>    PR &lt;-<span class="st"> </span><span class="kw"><a href="../reference/AR2PR.html">AR2PR</a></span>(AR, PAR, Bfn)</span>
 <span id="cb6-39"><a href="#cb6-39"></a>    X_i =<span class="st"> </span>PR<span class="op">$</span>X</span>
 <span id="cb6-40"><a href="#cb6-40"></a>    C_i =<span class="st"> </span>PR<span class="op">$</span>C</span>
 <span id="cb6-41"><a href="#cb6-41"></a>    add.dt &lt;-<span class="st">  </span><span class="kw">data.table</span>(<span class="dt">AR =</span> AR, <span class="dt">rho =</span> rho_i, <span class="dt">X =</span> X_i, <span class="dt">C =</span> C_i)</span>
@@ -430,7 +430,7 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <a href="#pfpr-thresholds-and-ar2pr-monotonicity" class="anchor"></a><span class="math inline">\(Pf\)</span>PR Thresholds and AR2PR Monotonicity</h2>
 <p>As can be seen in the preceding plots, for a given level of drug use there are levels of <span class="math inline">\(Pf\)</span>PR that are not plausible. These thresholds can assist with identifying a disconnect between estimated case management and <span class="math inline">\(Pf\)</span>PR. In addition, the relationship between AR and PR is not monotonic for certain levels of treatment, leading to two solutions for a given <span class="math inline">\(Pf\)</span>PR that exceeds the PR associated with an AR of 1 but is less than the maximum allowable PR. In order to address both of these phenomenon we will introduce boundary conditions and report both possible AR values when convert from <span class="math inline">\(Pf\)</span>PR to AR.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>AR2PRopt &lt;-<span class="st"> </span><span class="cf">function</span>(A, PAR, Bfn) {</span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">AR2PR</span>(A, PAR, Bfn)<span class="op">$</span>X</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw"><a href="../reference/AR2PR.html">AR2PR</a></span>(A, PAR, Bfn)<span class="op">$</span>X</span>
 <span id="cb7-3"><a href="#cb7-3"></a>}</span>
 <span id="cb7-4"><a href="#cb7-4"></a></span>
 <span id="cb7-5"><a href="#cb7-5"></a>findAXmax &lt;-<span class="st"> </span><span class="cf">function</span>(PAR, Bfn) {</span>
@@ -450,12 +450,12 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt; [1] 0.3259383</span></span>
 <span id="cb7-20"><a href="#cb7-20"></a></span>
 <span id="cb7-21"><a href="#cb7-21"></a>fn &lt;-<span class="st"> </span><span class="cf">function</span>(A, PAR, Bfn, X) {</span>
-<span id="cb7-22"><a href="#cb7-22"></a>    PR =<span class="st"> </span><span class="kw">AR2PR</span>(A, PAR, Bfn)<span class="op">$</span>X</span>
+<span id="cb7-22"><a href="#cb7-22"></a>    PR =<span class="st"> </span><span class="kw"><a href="../reference/AR2PR.html">AR2PR</a></span>(A, PAR, Bfn)<span class="op">$</span>X</span>
 <span id="cb7-23"><a href="#cb7-23"></a>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(X <span class="op">-</span><span class="st"> </span>PR))</span>
 <span id="cb7-24"><a href="#cb7-24"></a>}</span>
 <span id="cb7-25"><a href="#cb7-25"></a></span>
 <span id="cb7-26"><a href="#cb7-26"></a>PR2AReq &lt;-<span class="st"> </span><span class="cf">function</span>(X, PAR, Bfn) {</span>
-<span id="cb7-27"><a href="#cb7-27"></a>  A1X &lt;-<span class="st"> </span><span class="kw">AR2PR</span>(<span class="dv">1</span>, PAR, Bfn)</span>
+<span id="cb7-27"><a href="#cb7-27"></a>  A1X &lt;-<span class="st"> </span><span class="kw"><a href="../reference/AR2PR.html">AR2PR</a></span>(<span class="dv">1</span>, PAR, Bfn)</span>
 <span id="cb7-28"><a href="#cb7-28"></a>  max &lt;-<span class="st"> </span><span class="kw"><a href="../reference/findAXmax.html">findAXmax</a></span>(PAR, Bfn)</span>
 <span id="cb7-29"><a href="#cb7-29"></a>  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"max A: "</span>, <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(max<span class="op">$</span>A, <span class="dv">3</span>), <span class="st">"; max X: "</span>, <span class="kw"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(max<span class="op">$</span>X, <span class="dv">3</span>)))</span>
 <span id="cb7-30"><a href="#cb7-30"></a>  mono &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span>(A1X<span class="op">$</span>X <span class="op">-</span><span class="st"> </span>max<span class="op">$</span>X) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.001</span></span>
@@ -477,14 +477,14 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb7-46"><a href="#cb7-46"></a>    A =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/optimize.html">optimize</a></span>(fn, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, max<span class="op">$</span>A), <span class="dt">PAR =</span> PAR, <span class="dt">X =</span> Xi, <span class="dt">Bfn =</span> Bfn)<span class="op">$</span>minimum</span>
 <span id="cb7-47"><a href="#cb7-47"></a>    outA =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(outA, A)</span>
 <span id="cb7-48"><a href="#cb7-48"></a>    PAR<span class="op">$</span>A =<span class="st"> </span>A</span>
-<span id="cb7-49"><a href="#cb7-49"></a>    Y =<span class="st"> </span><span class="kw">findYeq</span>(PAR, Bfn)</span>
+<span id="cb7-49"><a href="#cb7-49"></a>    Y =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, Bfn)</span>
 <span id="cb7-50"><a href="#cb7-50"></a>    outY[, <span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(X <span class="op">==</span><span class="st"> </span>Xi)] =<span class="st"> </span>Y</span>
 <span id="cb7-51"><a href="#cb7-51"></a>    <span class="cf">if</span>(<span class="op">!</span>mono) {</span>
 <span id="cb7-52"><a href="#cb7-52"></a>      <span class="cf">if</span>(Xi <span class="op">&gt;</span><span class="st"> </span>A1X<span class="op">$</span>X) {</span>
 <span id="cb7-53"><a href="#cb7-53"></a>        A =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/optimize.html">optimize</a></span>(fn, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(max<span class="op">$</span>A, <span class="dv">1</span>), <span class="dt">PAR =</span> PAR, <span class="dt">X =</span> Xi, <span class="dt">Bfn =</span> Bfn)<span class="op">$</span>minimum</span>
 <span id="cb7-54"><a href="#cb7-54"></a>        outA2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(outA2, A)</span>
 <span id="cb7-55"><a href="#cb7-55"></a>        PAR<span class="op">$</span>A =<span class="st"> </span>A</span>
-<span id="cb7-56"><a href="#cb7-56"></a>        Y =<span class="st"> </span><span class="kw">findYeq</span>(PAR, Bfn)</span>
+<span id="cb7-56"><a href="#cb7-56"></a>        Y =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, Bfn)</span>
 <span id="cb7-57"><a href="#cb7-57"></a>        outY2[, <span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(X <span class="op">==</span><span class="st"> </span>Xi)] &lt;-<span class="st"> </span>Y</span>
 <span id="cb7-58"><a href="#cb7-58"></a>      } <span class="cf">else</span> {</span>
 <span id="cb7-59"><a href="#cb7-59"></a>        outA2 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(outA2, <span class="ot">NA</span>)</span>
@@ -574,7 +574,7 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb9-14"><a href="#cb9-14"></a>W =<span class="st"> </span><span class="kw">makeWdrugs</span>(PAR)</span>
 <span id="cb9-15"><a href="#cb9-15"></a>makeVdrugs &lt;-<span class="st"> </span><span class="cf">function</span>(PAR) {</span>
 <span id="cb9-16"><a href="#cb9-16"></a>    PAR<span class="op">$</span>A =<span class="st"> </span><span class="dv">0</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a>    <span class="kw">makeBdrugs</span>(PAR)</span>
+<span id="cb9-17"><a href="#cb9-17"></a>    <span class="kw"><a href="../reference/makeBdrugs.html">makeBdrugs</a></span>(PAR)</span>
 <span id="cb9-18"><a href="#cb9-18"></a>}</span>
 <span id="cb9-19"><a href="#cb9-19"></a>V =<span class="st"> </span><span class="kw">makeVdrugs</span>(PAR)</span>
 <span id="cb9-20"><a href="#cb9-20"></a></span>
@@ -582,11 +582,11 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb9-22"><a href="#cb9-22"></a></span>
 <span id="cb9-23"><a href="#cb9-23"></a><span class="co"># Set up equilibrium start values</span></span>
 <span id="cb9-24"><a href="#cb9-24"></a>forwardA =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(eqAR<span class="op">$</span>A[<span class="dv">1</span>])</span>
-<span id="cb9-25"><a href="#cb9-25"></a>Y =<span class="st"> </span><span class="kw">findYeq</span>(PAR, makeBdrugs)</span>
+<span id="cb9-25"><a href="#cb9-25"></a>Y =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, makeBdrugs)</span>
 <span id="cb9-26"><a href="#cb9-26"></a><span class="co"># Simulate forward</span></span>
 <span id="cb9-27"><a href="#cb9-27"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(X)) {</span>
 <span id="cb9-28"><a href="#cb9-28"></a>    forwardA[i] =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>((X[i] <span class="op">-</span><span class="st"> </span>D<span class="op">%*%</span>V<span class="op">%*%</span>Y) <span class="op">/</span><span class="st"> </span>(D<span class="op">%*%</span>W<span class="op">%*%</span>Y))</span>
-<span id="cb9-29"><a href="#cb9-29"></a>    B =<span class="st"> </span><span class="kw">makeBdrugs</span>(PAR)</span>
+<span id="cb9-29"><a href="#cb9-29"></a>    B =<span class="st"> </span><span class="kw"><a href="../reference/makeBdrugs.html">makeBdrugs</a></span>(PAR)</span>
 <span id="cb9-30"><a href="#cb9-30"></a>    Y =<span class="st"> </span>B<span class="op">%*%</span>Y</span>
 <span id="cb9-31"><a href="#cb9-31"></a>}</span>
 <span id="cb9-32"><a href="#cb9-32"></a></span>
@@ -625,7 +625,7 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb10-11"><a href="#cb10-11"></a>  D =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(D, <span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, Cn))</span>
 <span id="cb10-12"><a href="#cb10-12"></a>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(D)</span>
 <span id="cb10-13"><a href="#cb10-13"></a>}</span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="kw">makeD</span>(PAR)</span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="kw"><a href="../reference/makeD.html">makeD</a></span>(PAR)</span>
 <span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt;  [1] 0 0 1 1 1 1 1 1 1 1 1 1</span></span>
 <span id="cb10-16"><a href="#cb10-16"></a></span>
 <span id="cb10-17"><a href="#cb10-17"></a>makeBage &lt;-<span class="st"> </span><span class="cf">function</span>(PAR) {</span>
@@ -647,14 +647,14 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb10-33"><a href="#cb10-33"></a>  </span>
 <span id="cb10-34"><a href="#cb10-34"></a>  M</span>
 <span id="cb10-35"><a href="#cb10-35"></a>}</span>
-<span id="cb10-36"><a href="#cb10-36"></a>B =<span class="st"> </span><span class="kw">makeBage</span>(PAR)</span>
+<span id="cb10-36"><a href="#cb10-36"></a>B =<span class="st"> </span><span class="kw"><a href="../reference/makeBage.html">makeBage</a></span>(PAR)</span>
 <span id="cb10-37"><a href="#cb10-37"></a><span class="kw"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span>(B)</span>
 <span id="cb10-38"><a href="#cb10-38"></a><span class="co">#&gt;  S E0 Ei Ei Ei Ei Ei Ii Ii Ii Ii Im </span></span>
 <span id="cb10-39"><a href="#cb10-39"></a><span class="co">#&gt;  1  1  1  1  1  1  1  1  1  1  1  1</span></span>
 <span id="cb10-40"><a href="#cb10-40"></a></span>
 <span id="cb10-41"><a href="#cb10-41"></a>makeVage &lt;-<span class="st"> </span><span class="cf">function</span>(PAR) {</span>
 <span id="cb10-42"><a href="#cb10-42"></a>  PAR<span class="op">$</span>A=<span class="dv">0</span></span>
-<span id="cb10-43"><a href="#cb10-43"></a>  <span class="kw">makeBage</span>(PAR)</span>
+<span id="cb10-43"><a href="#cb10-43"></a>  <span class="kw"><a href="../reference/makeBage.html">makeBage</a></span>(PAR)</span>
 <span id="cb10-44"><a href="#cb10-44"></a>}</span>
 <span id="cb10-45"><a href="#cb10-45"></a>V =<span class="st"> </span><span class="kw">makeVage</span>(PAR)</span>
 <span id="cb10-46"><a href="#cb10-46"></a><span class="kw"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span>(V)</span>
@@ -662,7 +662,7 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb10-48"><a href="#cb10-48"></a><span class="co">#&gt;  1  1  1  1  1  1  1  1  1  1  1  1</span></span>
 <span id="cb10-49"><a href="#cb10-49"></a></span>
 <span id="cb10-50"><a href="#cb10-50"></a>makeWage &lt;-<span class="st"> </span><span class="cf">function</span>(PAR){</span>
-<span id="cb10-51"><a href="#cb10-51"></a>  (<span class="kw">makeBage</span>(PAR)<span class="op">-</span><span class="kw">makeVage</span>(PAR))<span class="op">/</span>PAR<span class="op">$</span>A</span>
+<span id="cb10-51"><a href="#cb10-51"></a>  (<span class="kw"><a href="../reference/makeBage.html">makeBage</a></span>(PAR)<span class="op">-</span><span class="kw">makeVage</span>(PAR))<span class="op">/</span>PAR<span class="op">$</span>A</span>
 <span id="cb10-52"><a href="#cb10-52"></a>}</span>
 <span id="cb10-53"><a href="#cb10-53"></a>W =<span class="st"> </span><span class="kw">makeWage</span>(PAR)</span>
 <span id="cb10-54"><a href="#cb10-54"></a><span class="kw"><a href="https://rdrr.io/r/base/colSums.html">colSums</a></span>(W)</span>
@@ -675,12 +675,12 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb10-61"><a href="#cb10-61"></a></span>
 <span id="cb10-62"><a href="#cb10-62"></a><span class="co"># Update AR2PR to accomodate exposure and treatment class</span></span>
 <span id="cb10-63"><a href="#cb10-63"></a>AR2PR &lt;-<span class="st"> </span><span class="cf">function</span>(A, PAR, Bfn, <span class="dt">eigen =</span> T) {</span>
-<span id="cb10-64"><a href="#cb10-64"></a>    D =<span class="st"> </span><span class="kw">makeD</span>(PAR)</span>
+<span id="cb10-64"><a href="#cb10-64"></a>    D =<span class="st"> </span><span class="kw"><a href="../reference/makeD.html">makeD</a></span>(PAR)</span>
 <span id="cb10-65"><a href="#cb10-65"></a>    PR =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>()</span>
 <span id="cb10-66"><a href="#cb10-66"></a>    <span class="cf">for</span>(Ai <span class="cf">in</span> A) {</span>
 <span id="cb10-67"><a href="#cb10-67"></a>        PAR<span class="op">$</span>A =<span class="st"> </span>Ai</span>
 <span id="cb10-68"><a href="#cb10-68"></a>        <span class="cf">if</span>(eigen) {</span>
-<span id="cb10-69"><a href="#cb10-69"></a>            eq =<span class="st"> </span><span class="kw">findYeq</span>(PAR, Bfn)</span>
+<span id="cb10-69"><a href="#cb10-69"></a>            eq =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, Bfn)</span>
 <span id="cb10-70"><a href="#cb10-70"></a>        } <span class="cf">else</span> {</span>
 <span id="cb10-71"><a href="#cb10-71"></a>            eq =<span class="st"> </span><span class="kw">algebYeq</span>(PAR)</span>
 <span id="cb10-72"><a href="#cb10-72"></a>        }</span>
@@ -721,8 +721,8 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a></span>
 <span id="cb12-2"><a href="#cb12-2"></a>PAR<span class="op">$</span>A =<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(eqAR<span class="op">$</span>A[<span class="dv">1</span>])</span>
-<span id="cb12-3"><a href="#cb12-3"></a>Y =<span class="st"> </span><span class="kw">findYeq</span>(PAR, makeBage)</span>
-<span id="cb12-4"><a href="#cb12-4"></a>D =<span class="st"> </span><span class="kw">makeD</span>(PAR)</span>
+<span id="cb12-3"><a href="#cb12-3"></a>Y =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, makeBage)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>D =<span class="st"> </span><span class="kw"><a href="../reference/makeD.html">makeD</a></span>(PAR)</span>
 <span id="cb12-5"><a href="#cb12-5"></a><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>((X[i] <span class="op">-</span><span class="st"> </span>D<span class="op">%*%</span>V<span class="op">%*%</span>Y) <span class="op">/</span><span class="st"> </span>(D<span class="op">%*%</span>W<span class="op">%*%</span>Y))</span>
 <span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; [1] 5.187568e+16</span></span>
 <span id="cb12-7"><a href="#cb12-7"></a></span>
@@ -741,9 +741,9 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb13-2"><a href="#cb13-2"></a>fn2 &lt;-<span class="st"> </span><span class="cf">function</span>(params, PAR, Bfn, X) {</span>
 <span id="cb13-3"><a href="#cb13-3"></a>  A1 =<span class="st"> </span>params[<span class="dv">1</span>]</span>
 <span id="cb13-4"><a href="#cb13-4"></a>  A2 =<span class="st"> </span>params[<span class="dv">2</span>]</span>
-<span id="cb13-5"><a href="#cb13-5"></a>  D =<span class="st"> </span><span class="kw">makeD</span>(PAR)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  D =<span class="st"> </span><span class="kw"><a href="../reference/makeD.html">makeD</a></span>(PAR)</span>
 <span id="cb13-6"><a href="#cb13-6"></a>  PAR<span class="op">$</span>A =<span class="st"> </span>A1</span>
-<span id="cb13-7"><a href="#cb13-7"></a>  Y0 =<span class="st"> </span><span class="kw">findYeq</span>(PAR, Bfn)</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  Y0 =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, Bfn)</span>
 <span id="cb13-8"><a href="#cb13-8"></a>  PAR<span class="op">$</span>A =<span class="st"> </span>A2</span>
 <span id="cb13-9"><a href="#cb13-9"></a>  B2 =<span class="st"> </span><span class="kw">Bfn</span>(PAR)</span>
 <span id="cb13-10"><a href="#cb13-10"></a>  Y1 =<span class="st"> </span>B2<span class="op">%*%</span>Y0</span>
@@ -755,13 +755,13 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb13-16"><a href="#cb13-16"></a></span>
 <span id="cb13-17"><a href="#cb13-17"></a><span class="co"># Set up equilibrium start values</span></span>
 <span id="cb13-18"><a href="#cb13-18"></a>forwardA =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(params[<span class="dv">1</span>])</span>
-<span id="cb13-19"><a href="#cb13-19"></a>Y0 =<span class="st"> </span><span class="kw">findYeq</span>(PAR, makeBage)</span>
+<span id="cb13-19"><a href="#cb13-19"></a>Y0 =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, makeBage)</span>
 <span id="cb13-20"><a href="#cb13-20"></a>forwardA[<span class="dv">2</span>] =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(params[<span class="dv">2</span>])</span>
-<span id="cb13-21"><a href="#cb13-21"></a>B =<span class="st"> </span><span class="kw">makeBage</span>(PAR)</span>
+<span id="cb13-21"><a href="#cb13-21"></a>B =<span class="st"> </span><span class="kw"><a href="../reference/makeBage.html">makeBage</a></span>(PAR)</span>
 <span id="cb13-22"><a href="#cb13-22"></a>Y =<span class="st"> </span>B<span class="op">%*%</span>Y0</span>
 <span id="cb13-23"><a href="#cb13-23"></a></span>
 <span id="cb13-24"><a href="#cb13-24"></a><span class="co"># Check against input X</span></span>
-<span id="cb13-25"><a href="#cb13-25"></a>D =<span class="st"> </span><span class="kw">makeD</span>(PAR)</span>
+<span id="cb13-25"><a href="#cb13-25"></a>D =<span class="st"> </span><span class="kw"><a href="../reference/makeD.html">makeD</a></span>(PAR)</span>
 <span id="cb13-26"><a href="#cb13-26"></a>X[<span class="dv">1</span>]</span>
 <span id="cb13-27"><a href="#cb13-27"></a><span class="co">#&gt; [1] 0.5</span></span>
 <span id="cb13-28"><a href="#cb13-28"></a>D<span class="op">%*%</span>Y</span>
@@ -772,7 +772,7 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb13-33"><a href="#cb13-33"></a><span class="co"># Simulate forward</span></span>
 <span id="cb13-34"><a href="#cb13-34"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">3</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(X)) {</span>
 <span id="cb13-35"><a href="#cb13-35"></a>    forwardA[i] =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>((X[i] <span class="op">-</span><span class="st"> </span>D<span class="op">%*%</span>V<span class="op">%*%</span>V<span class="op">%*%</span>Y) <span class="op">/</span><span class="st"> </span>(D<span class="op">%*%</span>V<span class="op">%*%</span>W<span class="op">%*%</span>Y))</span>
-<span id="cb13-36"><a href="#cb13-36"></a>    B =<span class="st"> </span><span class="kw">makeBage</span>(PAR)</span>
+<span id="cb13-36"><a href="#cb13-36"></a>    B =<span class="st"> </span><span class="kw"><a href="../reference/makeBage.html">makeBage</a></span>(PAR)</span>
 <span id="cb13-37"><a href="#cb13-37"></a>    Y =<span class="st"> </span>B<span class="op">%*%</span>Y</span>
 <span id="cb13-38"><a href="#cb13-38"></a>    forwardX =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(forwardX, D<span class="op">%*%</span>Y)</span>
 <span id="cb13-39"><a href="#cb13-39"></a>}</span>
@@ -865,7 +865,7 @@ C_2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;1&amp;0\\
 <span id="cb14-31"><a href="#cb14-31"></a>}</span>
 <span id="cb14-32"><a href="#cb14-32"></a></span>
 <span id="cb14-33"><a href="#cb14-33"></a>makeW =<span class="st"> </span><span class="cf">function</span>(PAR, Bfn){</span>
-<span id="cb14-34"><a href="#cb14-34"></a>  V =<span class="st"> </span><span class="kw">makeV</span>(PAR, Bfn)</span>
+<span id="cb14-34"><a href="#cb14-34"></a>  V =<span class="st"> </span><span class="kw"><a href="../reference/makeV.html">makeV</a></span>(PAR, Bfn)</span>
 <span id="cb14-35"><a href="#cb14-35"></a> (<span class="kw">Bfn</span>(PAR)<span class="op">-</span>V)<span class="op">/</span>PAR<span class="op">$</span>A</span>
 <span id="cb14-36"><a href="#cb14-36"></a>}</span>
 <span id="cb14-37"><a href="#cb14-37"></a></span>
@@ -877,16 +877,16 @@ C_2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;1&amp;0\\
 <span id="cb14-43"><a href="#cb14-43"></a><span class="co">#&gt; [1] "Non-monotonic"</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">## Generic forward simulation function</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>simAR &lt;-<span class="st"> </span><span class="cf">function</span>(X, PAR, Bfn) {  </span>
-<span id="cb15-3"><a href="#cb15-3"></a>  V =<span class="st"> </span><span class="kw">makeV</span>(PAR, Bfn)</span>
-<span id="cb15-4"><a href="#cb15-4"></a>  W =<span class="st"> </span><span class="kw">makeW</span>(PAR, Bfn)</span>
-<span id="cb15-5"><a href="#cb15-5"></a>  D =<span class="st"> </span><span class="kw">makeD</span>(PAR)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  V =<span class="st"> </span><span class="kw"><a href="../reference/makeV.html">makeV</a></span>(PAR, Bfn)</span>
+<span id="cb15-4"><a href="#cb15-4"></a>  W =<span class="st"> </span><span class="kw"><a href="../reference/makeW.html">makeW</a></span>(PAR, Bfn)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>  D =<span class="st"> </span><span class="kw"><a href="../reference/makeD.html">makeD</a></span>(PAR)</span>
 <span id="cb15-6"><a href="#cb15-6"></a>  outY &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="dt">nrow =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(D), <span class="dt">ncol =</span> <span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(X))</span>
 <span id="cb15-7"><a href="#cb15-7"></a>  <span class="cf">if</span>(PAR<span class="op">$</span>In <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) {</span>
 <span id="cb15-8"><a href="#cb15-8"></a>      params =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/optim.html">optim</a></span>(<span class="dt">fn =</span> fn2, <span class="dt">par =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="fl">0.1</span>), <span class="dt">PAR =</span> PAR, <span class="dt">Bfn =</span> Bfn, <span class="dt">X =</span> X)<span class="op">$</span>par</span>
 <span id="cb15-9"><a href="#cb15-9"></a>      </span>
 <span id="cb15-10"><a href="#cb15-10"></a>      <span class="co"># Set up equilibrium start values</span></span>
 <span id="cb15-11"><a href="#cb15-11"></a>      outA =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(params[<span class="dv">1</span>])</span>
-<span id="cb15-12"><a href="#cb15-12"></a>      Y0 =<span class="st"> </span><span class="kw">findYeq</span>(PAR, Bfn)</span>
+<span id="cb15-12"><a href="#cb15-12"></a>      Y0 =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, Bfn)</span>
 <span id="cb15-13"><a href="#cb15-13"></a>      outA[<span class="dv">2</span>] =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(params[<span class="dv">2</span>])</span>
 <span id="cb15-14"><a href="#cb15-14"></a>      B =<span class="st"> </span><span class="kw">Bfn</span>(PAR)</span>
 <span id="cb15-15"><a href="#cb15-15"></a>      Y =<span class="st"> </span>B<span class="op">%*%</span>Y0</span>
@@ -902,7 +902,7 @@ C_2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;1&amp;0\\
 <span id="cb15-25"><a href="#cb15-25"></a>  } <span class="cf">else</span> {</span>
 <span id="cb15-26"><a href="#cb15-26"></a>    <span class="co"># Set up equilibrium start values</span></span>
 <span id="cb15-27"><a href="#cb15-27"></a>    forwardA =<span class="st"> </span>PAR<span class="op">$</span>A =<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(eqAR<span class="op">$</span>A[<span class="dv">1</span>])</span>
-<span id="cb15-28"><a href="#cb15-28"></a>    Y =<span class="st"> </span><span class="kw">findYeq</span>(PAR, Bfn)</span>
+<span id="cb15-28"><a href="#cb15-28"></a>    Y =<span class="st"> </span><span class="kw"><a href="../reference/findYeq.html">findYeq</a></span>(PAR, Bfn)</span>
 <span id="cb15-29"><a href="#cb15-29"></a>    outY[, <span class="dv">1</span>] =<span class="st"> </span>Y</span>
 <span id="cb15-30"><a href="#cb15-30"></a>    <span class="co"># Simulate forward</span></span>
 <span id="cb15-31"><a href="#cb15-31"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(X)) {</span>
@@ -929,12 +929,12 @@ C_2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;1&amp;0\\
 <span id="cb15-52"><a href="#cb15-52"></a>  <span class="cf">if</span>(eq) {</span>
 <span id="cb15-53"><a href="#cb15-53"></a>    outList &lt;-<span class="st"> </span><span class="kw"><a href="../reference/PR2AReq.html">PR2AReq</a></span>(X, PAR, Bfn)</span>
 <span id="cb15-54"><a href="#cb15-54"></a>  } <span class="cf">else</span> {</span>
-<span id="cb15-55"><a href="#cb15-55"></a>    outList &lt;-<span class="st"> </span><span class="kw">simAR</span>(X, PAR, Bfn)</span>
+<span id="cb15-55"><a href="#cb15-55"></a>    outList &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simAR.html">simAR</a></span>(X, PAR, Bfn)</span>
 <span id="cb15-56"><a href="#cb15-56"></a>  }</span>
 <span id="cb15-57"><a href="#cb15-57"></a>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(outList)</span>
 <span id="cb15-58"><a href="#cb15-58"></a>}</span>
-<span id="cb15-59"><a href="#cb15-59"></a>forwardA =<span class="st"> </span><span class="kw">PR2AR</span>(X, PAR, <span class="dt">eq =</span> F)<span class="op">$</span>A</span>
-<span id="cb15-60"><a href="#cb15-60"></a>eqA =<span class="st"> </span><span class="kw">PR2AR</span>(X, PAR, <span class="dt">eq =</span> T)<span class="op">$</span>A</span>
+<span id="cb15-59"><a href="#cb15-59"></a>forwardA =<span class="st"> </span><span class="kw"><a href="../reference/PR2AR.html">PR2AR</a></span>(X, PAR, <span class="dt">eq =</span> F)<span class="op">$</span>A</span>
+<span id="cb15-60"><a href="#cb15-60"></a>eqA =<span class="st"> </span><span class="kw"><a href="../reference/PR2AR.html">PR2AR</a></span>(X, PAR, <span class="dt">eq =</span> T)<span class="op">$</span>A</span>
 <span id="cb15-61"><a href="#cb15-61"></a><span class="co">#&gt; [1] "max A: 0.185; max X: 0.322"</span></span>
 <span id="cb15-62"><a href="#cb15-62"></a><span class="co">#&gt; [1] "Non-monotonic"</span></span>
 <span id="cb15-63"><a href="#cb15-63"></a></span>

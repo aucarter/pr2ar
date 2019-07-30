@@ -1,9 +1,21 @@
-## Function for optimization of A
+#' Helper objective function for finding the optimal attack-rate for a given
+#' prevalence rate
+#'
+#' @param A An attack-rate
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
+#' @param X A prevalence rate
 fn <- function(A, PAR, Bfn, X) {
     PR = AR2PR(A, PAR, Bfn)$X
     return(abs(X - PR))
 }
-
+#' A function for finding the optimal attack-rate for a given prevalence rate
+#'
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
+#' @param X A prevalence rate
 ## Find optimal A
 optimA <- function(X, PAR, Bfn) {
     A <- c()
@@ -14,7 +26,14 @@ optimA <- function(X, PAR, Bfn) {
     return(A)
 }
 
-## Function for optimization of A in case of delay from exposure
+#' Helper objective function for finding a pair of optimal attack-rates for a
+#' given pair of starting prevalence rates when the model has an exposure class
+#'
+#' @param params A pair of attack-rates
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
+#' @param X A pair of prevalence rates
 fn2 <- function(params, PAR, Bfn, X) {
     A1 = params[1]
     A2 = params[2]
@@ -28,7 +47,13 @@ fn2 <- function(params, PAR, Bfn, X) {
     return(as.numeric(sum(abs(X[1] - D %*% Y1)) + sum(abs(X[2] - D %*% Y2))))
 }
 
-## Generic forward simulation function
+#' Generic forward simulation function that can accomdate models with and
+#' without exposure classes
+#'
+#' @param X A vector of prevalence rates
+#' @param PAR A set of model parameters
+#' @param Bfn A function for building the matrix represention of the system of
+#' equations that update the state vector
 simAR <- function(X, PAR, Bfn) {
     V = makeV(PAR, Bfn)
     W = makeW(PAR, Bfn)

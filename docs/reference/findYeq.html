@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters — PR2AReq • pr2ar</title>
+<title>Calculates the equilibrium Y for a given attack-rate and model — findYeq • pr2ar</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -33,11 +32,9 @@ conditional on the chosen model and parameters — PR2AReq • pr2ar</title>
 
 
 
-<meta property="og:title" content="Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters — PR2AReq" />
+<meta property="og:title" content="Calculates the equilibrium Y for a given attack-rate and model — findYeq" />
 
-<meta property="og:description" content="Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters" />
+<meta property="og:description" content="Calculates the equilibrium Y for a given attack-rate and model" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,28 +110,22 @@ conditional on the chosen model and parameters" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters</h1>
+    <h1>Calculates the equilibrium Y for a given attack-rate and model</h1>
     
-    <div class="hidden name"><code>PR2AReq.Rd</code></div>
+    <div class="hidden name"><code>findYeq.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Finds the equilibrium attack-rates for an input vector of prevalences,
-conditional on the chosen model and parameters</p>
+    <p>Calculates the equilibrium Y for a given attack-rate and model</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>PR2AReq</span>(<span class='no'>X</span>, <span class='no'>PAR</span>, <span class='no'>Bfn</span>, <span class='kw'>showMessages</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+    <pre class="usage"><span class='fu'>findYeq</span>(<span class='no'>PAR</span>, <span class='no'>Bfn</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>X</th>
-      <td><p>A vector of prevalence rates</p></td>
-    </tr>
     <tr>
       <th>PAR</th>
       <td><p>A set of model parameters</p></td>
@@ -143,10 +134,6 @@ conditional on the chosen model and parameters</p>
       <th>Bfn</th>
       <td><p>A function for building the matrix represention of the system of
 equations that update the state vector</p></td>
-    </tr>
-    <tr>
-      <th>showMessages</th>
-      <td><p>Toggle for whether the function prints messages</p></td>
     </tr>
     </table>
     

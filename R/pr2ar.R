@@ -1,4 +1,12 @@
-## Set up PR2AR that can take any model and return equilibrium or forward simulation values
+#' Master function for converting prevalence rates into attack-rates
+#'
+#' @param X A vector of prevalence rates
+#' @param PAR A set of parameters for the mechanistic model of malaria
+#' @param eq Toggle for whether to calculate all attack-rates at equilibrium or
+#' to only calculate the initial states at equilibrium and simulate forward
+#' @param showMessages Toggle for whether the function prints messages
+#' @param onlyAR Toggle for whether the function returns output other than a
+#' vector of attack-rates
 PR2AR <- function(X, PAR, eq = F, showMessages = F, onlyAR = F) {
     if (any(is.na(X))) {
         if (onlyAR) {

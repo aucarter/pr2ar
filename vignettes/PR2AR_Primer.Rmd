@@ -1,5 +1,5 @@
 ---
-title: "PR2AR Primer"
+title: "PR2AR_Primer"
 output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{PR2AR_Primer}
