@@ -1,5 +1,5 @@
 ---
-title: "PR2AR_Primer"
+title: "PR2AR Primer"
 output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{PR2AR_Primer}
@@ -20,7 +20,7 @@ library(data.table); library(ggplot2)
 ## Motivation
 $Pf$PR is the most frequently measured and estimated malaria metric, making it familiar to both modelers and policy makers. Despite its ubiquity, $Pf$PR has substantial limitations as intelligence for policy development. Primarily, a given level of $Pf$PR can be associated with a variety of transmission intensities based on differing levels of immunity, case detection rates, vector control, ages of infection, among other factors. The attack-rate, $A(t)$, measures the probability of acquiring an infection during a time period of length $t$. By developing an algorithm to simulate the latent attack-rate associated with a given time-series of $Pf$PR, we enable investigation of risk of malaria infection. Measuring attack-rate  -- or force of infection (FoI) -- directly requires cohort studies which are not universally available and can be expensive to conduct. Deriving estimates of attack-rate from $Pf$PR with uniform methods allows for comparison of risk of malaria infection across locations and over time.
 
-### A Bad Start
+## A Bad Start
 We assume that infections arise from a Poisson process with a rate equal to the FoI, $h$, so that the probability of acquiring a new infection after $t$ days is $A(t) = 1 - e^{-ht}$. Let $Q(r, t) = e^{-r t}$ denote the fraction of a cohort with recovery rate, $r$, that naturally remains infected after $t$ days. It is tempting to start with the simple model:
 \begin{equation} 
 X_{t+1} = A_t (1 - X_t) + Q X_t  
@@ -33,14 +33,14 @@ At the steady state, $X_{t+1} = X_t,$ so we get the relationship:
 $$\frac{A}{1-Q} = \frac{X}{1-X}$$
 Note that $A$, a probability, can be at most 1, so $X \leq 1/(2-Q)$. If we take a 14-day time step and assume $r = \frac{1}{200}$, then we get that Equation 2 gives nonsensical results for $X > 0.93$. Since there is no evidence that being infected protects against future infection, this is an artifact. 
 
-### A Better Start
+## A Better Start
 We don't want to work around artifacts, so what if we rethink the model. What if anyone can get infected, including the fraction that would have otherwise cleared their infections? The susceptible class is $1-X_t + (1-Q)X_t$, or more simply: 
 \begin{equation} 
 X_{t+1} = A_t (1 - Q X_t) + Q X_t  
 \end{equation}
 When $A=1$, at the steady state, we get that $X=1$. 
 
-### Matrix Form
+## Matrix Form
 One more wrinkle might help us write down equations without making errors. We will write down equations that assign a state to every person.  
 \begin{equation} \begin{array}{rl}
 S_{t+1} &=  (1-A_t) S_t + (1 - A_t)(1-Q)X_t\\
@@ -68,7 +68,7 @@ and
 0 &  Q \\
 \end{array} \right] \end{equation}
 
-### Steady State
+## Steady State
 $B$ is a Markov matrix, which guarantees that the largest eigenvalue must equal 1 and the associated first right eigenvector, $x_R$, is the stable equilibrium for the state vector $Y$, such that $B x_R = x_R$. We use this to solve for the steady state attack-rate associated with a given $Pf$PR value.
 
 Solving for the first right eigenvector
@@ -193,7 +193,7 @@ PR2AReq <- function(X, PAR, Bfn, optim = T) {
 ```
 
 
-### Forward Simulation vs. Steady State
+## Forward Simulation vs. Steady State
 Of course, we don't know $Y_t$ but we do know $X_t$, estimated $Pf$PR. We let $D$ denote the row vector that maps $Y$ onto $X$: $D = \left<0,1 \right>$ and 
 $$X = D \cdot Y = \left[ 
 \begin{array}{cc}
@@ -246,7 +246,7 @@ legend("topleft", legend = c("Steady", "Forward"), lty = 1:2)
 ```
 
 
-### Adding Drugs
+## Adding Drugs
 Let $\rho$ denote the fraction of incident malaria infections that are treated and cured. Let $\delta$ denote the rate anti-malarial drugs are used without a confirmed malaria case attributable to malaria. $C$ is now a state variable denoting the proportion of the population on treatment. 
 
 \begin{equation} \begin{array}{rl}
@@ -379,7 +379,7 @@ plotAR2PR <- function(PAR, Bfn, AR_range = c(0.01, 1), logX = T, logY = F,
 plotAR2PR(PAR, makeBdrugs)
 ```
 
-### $Pf$PR Thresholds and AR2PR Monotonicity
+## $Pf$PR Thresholds and AR2PR Monotonicity
 As can be seen in the preceding plots, for a given level of drug use there are levels of $Pf$PR that are not plausible. These thresholds can assist with identifying a disconnect between estimated case management and $Pf$PR. In addition, the relationship between AR and PR is not monotonic for certain levels of treatment, leading to two solutions for a given $Pf$PR that exceeds the PR associated with an AR of 1 but is less than the maximum allowable PR. In order to address both of these phenomenon we will introduce boundary conditions and report both possible AR values when convert from $Pf$PR to AR.
 
 ```{r}
@@ -500,7 +500,7 @@ legend("topleft", legend = c("Steady", "Forward"), lty = 1:2)
 
 Having worked through all that, we jump to a much harder model tracking the age of infection with the possibility of superinfection. 
 
-### Age of Infection (AoI) and Overwriting Superinfection
+## Age of Infection (AoI) and Overwriting Superinfection
 We keep most of the notation from before, but now let $I_{i,t}$ denote the fraction of the population that has had its most recent infection $i$ months ago, and $E_{i,t}$ denote the fraction of the population that was just exposed and whose previous infection occurred $i$ months ago: 
 \begin{equation} \begin{array}{rl}
 S_{t+1} & = (1-A_t) S_t  + \sum_i (1-A_t)(1-Q_i) I_{i,t}  \\ 
@@ -614,7 +614,7 @@ as.numeric((X[i] - D%*%V%*%Y) / (D%*%W%*%Y))
 D%*%W%*%Y
 ```
 
-### AoI Forward Simulation
+## AoI Forward Simulation
 Forward simulation with the initial $A_t$ formula breaks down because there is a one timestep delay in the impact of $A$ on $X$, so that $D \cdot W \cdot Y_t = 0$. We reformulate $A_t$ as a function of $X_{t+2}$;
 
 $$D Y_{t+2} = X_{t+2} = D B_{t+1} B_{t} Y_t = D(A_{t+1}W + V)(A_t W + V) Y_t = D(A_t A_{t+1} W^2 + A_{t+1} W V + A_t V W + V^2) Y_t$$
@@ -672,7 +672,7 @@ legend("topleft", legend = c("Steady", "Forward"), lty = 1:2)
 
 ```
 
-### Combine AoI with Overwriting Superinfection and Drugs
+## Combine AoI with Overwriting Superinfection and Drugs
 
 \begin{equation} \begin{array}{rl}
 S_{t+1} & = \left( 1 -\delta \right) \left[ (1-A_t) S_t  + \sum_i (1-A_t)(1-P_i) I_{i,t} +  C_{2,t}\right]  \\ 
@@ -839,8 +839,8 @@ lines(forwardA, lty = "dashed")
 legend("topleft", legend = c("Steady", "Forward"), lty = 1:2)
 ```
 
-### Heterogeneity in Attack-Rates
+## Heterogeneity in Attack-Rates
 
 
-### Heterogeneity in Treatment Habits
+## Heterogeneity in Treatment Habits
 

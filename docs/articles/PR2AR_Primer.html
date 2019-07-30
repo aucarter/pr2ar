@@ -86,25 +86,26 @@
 <h2 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h2>
 <p><span class="math inline">\(Pf\)</span>PR is the most frequently measured and estimated malaria metric, making it familiar to both modelers and policy makers. Despite its ubiquity, <span class="math inline">\(Pf\)</span>PR has substantial limitations as intelligence for policy development. Primarily, a given level of <span class="math inline">\(Pf\)</span>PR can be associated with a variety of transmission intensities based on differing levels of immunity, case detection rates, vector control, ages of infection, among other factors. The attack-rate, <span class="math inline">\(A(t)\)</span>, measures the probability of acquiring an infection during a time period of length <span class="math inline">\(t\)</span>. By developing an algorithm to simulate the latent attack-rate associated with a given time-series of <span class="math inline">\(Pf\)</span>PR, we enable investigation of risk of malaria infection. Measuring attack-rate – or force of infection (FoI) – directly requires cohort studies which are not universally available and can be expensive to conduct. Deriving estimates of attack-rate from <span class="math inline">\(Pf\)</span>PR with uniform methods allows for comparison of risk of malaria infection across locations and over time.</p>
-<div id="a-bad-start" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-bad-start" class="anchor"></a>A Bad Start</h3>
+</div>
+<div id="a-bad-start" class="section level2">
+<h2 class="hasAnchor">
+<a href="#a-bad-start" class="anchor"></a>A Bad Start</h2>
 <p>We assume that infections arise from a Poisson process with a rate equal to the FoI, <span class="math inline">\(h\)</span>, so that the probability of acquiring a new infection after <span class="math inline">\(t\)</span> days is <span class="math inline">\(A(t) = 1 - e^{-ht}\)</span>. Let <span class="math inline">\(Q(r, t) = e^{-r t}\)</span> denote the fraction of a cohort with recovery rate, <span class="math inline">\(r\)</span>, that naturally remains infected after <span class="math inline">\(t\)</span> days. It is tempting to start with the simple model: <span class="math display">\[\begin{equation} 
 X_{t+1} = A_t (1 - X_t) + Q X_t  
 \end{equation}\]</span> From this, we can solve for <span class="math inline">\(A_t\)</span>: <span class="math display">\[\begin{equation} 
 A_t = \frac{X_{t+1} - Q X_t}{1-X_t} 
 \end{equation}\]</span> At the steady state, <span class="math inline">\(X_{t+1} = X_t,\)</span> so we get the relationship: <span class="math display">\[\frac{A}{1-Q} = \frac{X}{1-X}\]</span> Note that <span class="math inline">\(A\)</span>, a probability, can be at most 1, so <span class="math inline">\(X \leq 1/(2-Q)\)</span>. If we take a 14-day time step and assume <span class="math inline">\(r = \frac{1}{200}\)</span>, then we get that Equation 2 gives nonsensical results for <span class="math inline">\(X &gt; 0.93\)</span>. Since there is no evidence that being infected protects against future infection, this is an artifact.</p>
 </div>
-<div id="a-better-start" class="section level3">
-<h3 class="hasAnchor">
-<a href="#a-better-start" class="anchor"></a>A Better Start</h3>
+<div id="a-better-start" class="section level2">
+<h2 class="hasAnchor">
+<a href="#a-better-start" class="anchor"></a>A Better Start</h2>
 <p>We don’t want to work around artifacts, so what if we rethink the model. What if anyone can get infected, including the fraction that would have otherwise cleared their infections? The susceptible class is <span class="math inline">\(1-X_t + (1-Q)X_t\)</span>, or more simply: <span class="math display">\[\begin{equation} 
 X_{t+1} = A_t (1 - Q X_t) + Q X_t  
 \end{equation}\]</span> When <span class="math inline">\(A=1\)</span>, at the steady state, we get that <span class="math inline">\(X=1\)</span>.</p>
 </div>
-<div id="matrix-form" class="section level3">
-<h3 class="hasAnchor">
-<a href="#matrix-form" class="anchor"></a>Matrix Form</h3>
+<div id="matrix-form" class="section level2">
+<h2 class="hasAnchor">
+<a href="#matrix-form" class="anchor"></a>Matrix Form</h2>
 <p>One more wrinkle might help us write down equations without making errors. We will write down equations that assign a state to every person.<br><span class="math display">\[\begin{equation} \begin{array}{rl}
 S_{t+1} &amp;=  (1-A_t) S_t + (1 - A_t)(1-Q)X_t\\
 X_{t+1} &amp;=  A_t S_t + A_t(1 - Q)X_t  + Q X_t \\
@@ -124,9 +125,9 @@ A_t &amp;  A_t(1 - Q) + Q \\
 0 &amp;  Q \\
 \end{array} \right] \end{equation}\]</span></p>
 </div>
-<div id="steady-state" class="section level3">
-<h3 class="hasAnchor">
-<a href="#steady-state" class="anchor"></a>Steady State</h3>
+<div id="steady-state" class="section level2">
+<h2 class="hasAnchor">
+<a href="#steady-state" class="anchor"></a>Steady State</h2>
 <p><span class="math inline">\(B\)</span> is a Markov matrix, which guarantees that the largest eigenvalue must equal 1 and the associated first right eigenvector, <span class="math inline">\(x_R\)</span>, is the stable equilibrium for the state vector <span class="math inline">\(Y\)</span>, such that <span class="math inline">\(B x_R = x_R\)</span>. We use this to solve for the steady state attack-rate associated with a given <span class="math inline">\(Pf\)</span>PR value.</p>
 <p>Solving for the first right eigenvector <span class="math display">\[
 (B - I) \cdot Y = 
@@ -245,9 +246,9 @@ A &amp;  -(1-A)(1-Q)\\
 <span id="cb3-9"><a href="#cb3-9"></a>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(AR)</span>
 <span id="cb3-10"><a href="#cb3-10"></a>}</span></code></pre></div>
 </div>
-<div id="forward-simulation-vs--steady-state" class="section level3">
-<h3 class="hasAnchor">
-<a href="#forward-simulation-vs--steady-state" class="anchor"></a>Forward Simulation vs. Steady State</h3>
+<div id="forward-simulation-vs--steady-state" class="section level2">
+<h2 class="hasAnchor">
+<a href="#forward-simulation-vs--steady-state" class="anchor"></a>Forward Simulation vs. Steady State</h2>
 <p>Of course, we don’t know <span class="math inline">\(Y_t\)</span> but we do know <span class="math inline">\(X_t\)</span>, estimated <span class="math inline">\(Pf\)</span>PR. We let <span class="math inline">\(D\)</span> denote the row vector that maps <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>: <span class="math inline">\(D = \left&lt;0,1 \right&gt;\)</span> and <span class="math display">\[X = D \cdot Y = \left[ 
 \begin{array}{cc}
 0 &amp; 1
@@ -293,9 +294,9 @@ X\\
 <span id="cb4-33"><a href="#cb4-33"></a><span class="kw"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span>(<span class="st">"topleft"</span>, <span class="dt">legend =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Steady"</span>, <span class="st">"Forward"</span>), <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
-<div id="adding-drugs" class="section level3">
-<h3 class="hasAnchor">
-<a href="#adding-drugs" class="anchor"></a>Adding Drugs</h3>
+<div id="adding-drugs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#adding-drugs" class="anchor"></a>Adding Drugs</h2>
 <p>Let <span class="math inline">\(\rho\)</span> denote the fraction of incident malaria infections that are treated and cured. Let <span class="math inline">\(\delta\)</span> denote the rate anti-malarial drugs are used without a confirmed malaria case attributable to malaria. <span class="math inline">\(C\)</span> is now a state variable denoting the proportion of the population on treatment.</p>
 <p><span class="math display">\[\begin{equation} \begin{array}{rl}
 S_{t+1} &amp;=  (1-\delta)(1-A_t) S_t + (1-A \rho)(1-Q) X_t + (1-\delta) C_t \\
@@ -424,9 +425,9 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb6-72"><a href="#cb6-72"></a><span class="kw">plotAR2PR</span>(PAR, makeBdrugs)</span></code></pre></div>
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
 </div>
-<div id="pfpr-thresholds-and-ar2pr-monotonicity" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pfpr-thresholds-and-ar2pr-monotonicity" class="anchor"></a><span class="math inline">\(Pf\)</span>PR Thresholds and AR2PR Monotonicity</h3>
+<div id="pfpr-thresholds-and-ar2pr-monotonicity" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pfpr-thresholds-and-ar2pr-monotonicity" class="anchor"></a><span class="math inline">\(Pf\)</span>PR Thresholds and AR2PR Monotonicity</h2>
 <p>As can be seen in the preceding plots, for a given level of drug use there are levels of <span class="math inline">\(Pf\)</span>PR that are not plausible. These thresholds can assist with identifying a disconnect between estimated case management and <span class="math inline">\(Pf\)</span>PR. In addition, the relationship between AR and PR is not monotonic for certain levels of treatment, leading to two solutions for a given <span class="math inline">\(Pf\)</span>PR that exceeds the PR associated with an AR of 1 but is less than the maximum allowable PR. In order to address both of these phenomenon we will introduce boundary conditions and report both possible AR values when convert from <span class="math inline">\(Pf\)</span>PR to AR.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>AR2PRopt &lt;-<span class="st"> </span><span class="cf">function</span>(A, PAR, Bfn) {</span>
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">AR2PR</span>(A, PAR, Bfn)<span class="op">$</span>X</span>
@@ -598,9 +599,9 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Having worked through all that, we jump to a much harder model tracking the age of infection with the possibility of superinfection.</p>
 </div>
-<div id="age-of-infection-aoi-and-overwriting-superinfection" class="section level3">
-<h3 class="hasAnchor">
-<a href="#age-of-infection-aoi-and-overwriting-superinfection" class="anchor"></a>Age of Infection (AoI) and Overwriting Superinfection</h3>
+<div id="age-of-infection-aoi-and-overwriting-superinfection" class="section level2">
+<h2 class="hasAnchor">
+<a href="#age-of-infection-aoi-and-overwriting-superinfection" class="anchor"></a>Age of Infection (AoI) and Overwriting Superinfection</h2>
 <p>We keep most of the notation from before, but now let <span class="math inline">\(I_{i,t}\)</span> denote the fraction of the population that has had its most recent infection <span class="math inline">\(i\)</span> months ago, and <span class="math inline">\(E_{i,t}\)</span> denote the fraction of the population that was just exposed and whose previous infection occurred <span class="math inline">\(i\)</span> months ago: <span class="math display">\[\begin{equation} \begin{array}{rl}
 S_{t+1} &amp; = (1-A_t) S_t  + \sum_i (1-A_t)(1-Q_i) I_{i,t}  \\ 
 E_{0, t+1} &amp;=  A_t \left[ S_t + \sum_i (1-Q_i)I_{i,t} \right] \\ 
@@ -729,9 +730,9 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt;              [,1]</span></span>
 <span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; [1,] 5.161384e-18</span></span></code></pre></div>
 </div>
-<div id="aoi-forward-simulation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#aoi-forward-simulation" class="anchor"></a>AoI Forward Simulation</h3>
+<div id="aoi-forward-simulation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#aoi-forward-simulation" class="anchor"></a>AoI Forward Simulation</h2>
 <p>Forward simulation with the initial <span class="math inline">\(A_t\)</span> formula breaks down because there is a one timestep delay in the impact of <span class="math inline">\(A\)</span> on <span class="math inline">\(X\)</span>, so that <span class="math inline">\(D \cdot W \cdot Y_t = 0\)</span>. We reformulate <span class="math inline">\(A_t\)</span> as a function of <span class="math inline">\(X_{t+2}\)</span>;</p>
 <p><span class="math display">\[D Y_{t+2} = X_{t+2} = D B_{t+1} B_{t} Y_t = D(A_{t+1}W + V)(A_t W + V) Y_t = D(A_t A_{t+1} W^2 + A_{t+1} W V + A_t V W + V^2) Y_t\]</span></p>
 <p>Because the row sums of <span class="math inline">\(W\)</span> are zero, the terms <span class="math inline">\(A_t A_{t+1} W^2\)</span> and <span class="math inline">\(A_{t+1} W V\)</span> drop out and we get,</p>
@@ -786,9 +787,9 @@ I_{n,t+1} &amp;=   (1-A_t) \left( Q_{n-1, t} I_{n-1,t} +  Q_{n, t} I_{n,t} \righ
 <span id="cb13-48"><a href="#cb13-48"></a><span class="kw"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span>(<span class="st">"topleft"</span>, <span class="dt">legend =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Steady"</span>, <span class="st">"Forward"</span>), <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
-<div id="combine-aoi-with-overwriting-superinfection-and-drugs" class="section level3">
-<h3 class="hasAnchor">
-<a href="#combine-aoi-with-overwriting-superinfection-and-drugs" class="anchor"></a>Combine AoI with Overwriting Superinfection and Drugs</h3>
+<div id="combine-aoi-with-overwriting-superinfection-and-drugs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#combine-aoi-with-overwriting-superinfection-and-drugs" class="anchor"></a>Combine AoI with Overwriting Superinfection and Drugs</h2>
 <p><span class="math display">\[\begin{equation} \begin{array}{rl}
 S_{t+1} &amp; = \left( 1 -\delta \right) \left[ (1-A_t) S_t  + \sum_i (1-A_t)(1-P_i) I_{i,t} +  C_{2,t}\right]  \\ 
 E_{0, t+1} &amp;= \left( 1 -\delta \right) A_t \left[ S_t + \sum_i (1-P_i)(1-\rho_i)I_{i,t} \right] \\ 
@@ -944,14 +945,13 @@ C_2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;1&amp;0\\
 <span id="cb15-68"><a href="#cb15-68"></a><span class="kw"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span>(<span class="st">"topleft"</span>, <span class="dt">legend =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Steady"</span>, <span class="st">"Forward"</span>), <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
-<div id="heterogeneity-in-attack-rates" class="section level3">
-<h3 class="hasAnchor">
-<a href="#heterogeneity-in-attack-rates" class="anchor"></a>Heterogeneity in Attack-Rates</h3>
+<div id="heterogeneity-in-attack-rates" class="section level2">
+<h2 class="hasAnchor">
+<a href="#heterogeneity-in-attack-rates" class="anchor"></a>Heterogeneity in Attack-Rates</h2>
 </div>
-<div id="heterogeneity-in-treatment-habits" class="section level3">
-<h3 class="hasAnchor">
-<a href="#heterogeneity-in-treatment-habits" class="anchor"></a>Heterogeneity in Treatment Habits</h3>
-</div>
+<div id="heterogeneity-in-treatment-habits" class="section level2">
+<h2 class="hasAnchor">
+<a href="#heterogeneity-in-treatment-habits" class="anchor"></a>Heterogeneity in Treatment Habits</h2>
 </div>
   </div>
 
@@ -961,6 +961,18 @@ C_2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;1&amp;0\\
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#motivation">Motivation</a></li>
+      <li><a href="#a-bad-start">A Bad Start</a></li>
+      <li><a href="#a-better-start">A Better Start</a></li>
+      <li><a href="#matrix-form">Matrix Form</a></li>
+      <li><a href="#steady-state">Steady State</a></li>
+      <li><a href="#forward-simulation-vs--steady-state">Forward Simulation vs. Steady State</a></li>
+      <li><a href="#adding-drugs">Adding Drugs</a></li>
+      <li><a href="#pfpr-thresholds-and-ar2pr-monotonicity"><span class="math inline">\(Pf\)</span>PR Thresholds and AR2PR Monotonicity</a></li>
+      <li><a href="#age-of-infection-aoi-and-overwriting-superinfection">Age of Infection (AoI) and Overwriting Superinfection</a></li>
+      <li><a href="#aoi-forward-simulation">AoI Forward Simulation</a></li>
+      <li><a href="#combine-aoi-with-overwriting-superinfection-and-drugs">Combine AoI with Overwriting Superinfection and Drugs</a></li>
+      <li><a href="#heterogeneity-in-attack-rates">Heterogeneity in Attack-Rates</a></li>
+      <li><a href="#heterogeneity-in-treatment-habits">Heterogeneity in Treatment Habits</a></li>
       </ul>
 </div>
       </div>
