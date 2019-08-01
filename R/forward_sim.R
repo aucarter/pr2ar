@@ -54,40 +54,54 @@ fn2 <- function(params, PAR, Bfn, X) {
 #' @param PAR A set of model parameters
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
-simAR <- function(X, PAR, Bfn) {
+#' @param cpp A toggle for using the C++ version of the forward simulation
+#' algorithm
+simAR <- function(X, PAR, Bfn, cpp = T) {
     V = makeV(PAR, Bfn)
     W = makeW(PAR, Bfn)
     D = makeD(PAR)
-    outY <- matrix(nrow = length(D), ncol = length(X))
+    # outY <- matrix(nrow = length(D), ncol = length(X))
     if (PAR$In > 1) {
+        ## Exposure class
         params = stats::optim(fn = fn2, par = c(0, 0.1), PAR = PAR, Bfn = Bfn, X = X)$par
-        # Set up equilibrium start values
-        outA = PAR$A = c(params[1])
-        Y0 = findYeq(PAR, Bfn)
-        outA[2] = PAR$A = c(params[2])
-        B = Bfn(PAR)
-        Y = B %*% Y0
-        outY[, 1] = Y
-
-        # Simulate forward
-        for (i in 3:length(X)) {
-            outA[i] = PAR$A = as.numeric((X[i] - D %*% V %*% V %*% Y)/(D %*% V %*% W %*% Y))
+        if(cpp) {
+            outA <- simA2(V, W, D, X, params)
+        } else {
+            # Set up equilibrium start values
+            PAR$A = c(params[1])
+            Y0 = findYeq(PAR, Bfn)
+            outA = PAR$A = c(params[2])
             B = Bfn(PAR)
-            Y = B %*% Y
-            outY[, i - 1] = Y
+            Y = B %*% Y0
+            # outY[, 1] = Y
+
+            # Simulate forward
+            for (i in 3:length(X)) {
+                outA[i - 1] = PAR$A = as.numeric((X[i] - D %*% V %*% V %*% Y)/(D %*% V %*% W %*% Y))
+                B = Bfn(PAR)
+                Y = B %*% Y
+                # outY[, i - 1] = Y
+            }
         }
     } else {
+        ## No exposure class
         # Set up equilibrium start values
-        forwardA = PAR$A = optimA(X[1], PAR, Bfn)
-        Y = findYeq(PAR, Bfn)
-        outY[, 1] = Y
-        # Simulate forward
-        for (i in 2:length(X)) {
-            forwardA[i] = PAR$A = as.numeric((X[i] - D %*% V %*% Y)/(D %*% W %*% Y))
-            B = Bfn(PAR)
-            Y = B %*% Y
-            outY[, i] = Y
+        outA = PAR$A = c(optimA(X[1], PAR, Bfn))
+        if(cpp) {
+            outA = simA1(V, W, D, X, outA)
+        } else {
+            Y = findYeq(PAR, Bfn)
+            # outY[, 1] = Y
+            # Simulate forward
+            for (i in 2:length(X)) {
+                outA[i] = PAR$A = as.numeric((X[i] - D %*% V %*% Y)/(D %*% W %*% Y))
+                B = Bfn(PAR)
+                Y = B %*% Y
+                # outY[, i] = Y
+            }
         }
+
     }
-    return(list(A = outA, Y = outY))
+    # return(list(A = outA, Y = outY))
+    return(list(A = outA))
 }

@@ -5,7 +5,7 @@
 \title{Generic forward simulation function that can accomdate models with and
 without exposure classes}
 \usage{
-simAR(X, PAR, Bfn)
+simAR(X, PAR, Bfn, cpp = T)
 }
 \arguments{
 \item{X}{A vector of prevalence rates}
@@ -14,6 +14,9 @@ simAR(X, PAR, Bfn)
 
 \item{Bfn}{A function for building the matrix represention of the system of
 equations that update the state vector}
+
+\item{cpp}{A toggle for using the C++ version of the forward simulation
+algorithm}
 }
 \description{
 Generic forward simulation function that can accomdate models with and

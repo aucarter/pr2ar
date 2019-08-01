@@ -28,7 +28,7 @@ makeD <- function(PAR) {
     In = PAR$In
     Cn = PAR$Cn
     D = c(0)
-    if (In > 0) {
+    if (In > 1) {
         D = c(D, 0, rep(1, In * 2))
     } else {
         D = c(D, 1)

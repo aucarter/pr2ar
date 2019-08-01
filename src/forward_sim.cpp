@@ -1,96 +1,70 @@
-// #include <Rcpp.h>
-// // #include <RcppEigen.h>
-// using namespace Rcpp;
-//
-// // using Eigen::VectorXd;
-// // using Eigen::MatrixXd;
-// // using Eigen::Map;
-// // using Eigen::SelfAdjointEigenSolver;
-//
-// // [[Rcpp::export]]
-// NumericMatrix matrixMult(NumericMatrix A, NumericMatrix B) {
-//     int n = A.nrow();
-//     NumericMatrix C(n, n);
-//     for(int i = 0; i < n; i++) {
-//         for(int j = 0; j < n; j++) {
-//             double sum = 0;
-//             for(int k = 0; k < n; k++) {
-//                 sum += A(i, k) * B(k, j);
-//             }
-//             C(i, j) = sum;
-//         }
-//     }
-//     return C;
-// }
-//
-// // [[Rcpp::export]]
-// NumericMatrix scalarMult(double A, NumericMatrix B) {
-//     int n = B.nrow();
-//     NumericMatrix C(n, n);
-//     for(int i = 0; i < n; i++) {
-//         for(int j = 0; j < n; j++) {
-//             C(i, j) = A * B(i, j);
-//         }
-//     }
-//     return C;
-// }
-//
-// // [[Rcpp::export]]
-// NumericMatrix matrixAdd(NumericMatrix A, NumericMatrix B) {
-//     int n = A.nrow();
-//     NumericMatrix C(n, n);
-//     for(int i = 0; i < n; i++) {
-//         for(int j = 0; j < n; j++) {
-//             C(i, j) = A(i, j) + B(i, j);
-//         }
-//     }
-//     return C;
-// }
-//
-// //
-// // // [[Rcpp::export]]
-// // MatrixXd makeB(MatrixXd W, MatrixXd V, double A) {
-// //     MatrixXd B = A * W + V;
-// //     return B;
-// // }
-// //
-// // // [[Rcpp::export]]
-// // VectorXd eigenY(Map<MatrixXd> W, Map<MatrixXd> V, double A) {
-// //     MatrixXd B = makeB(W, V, A);
-// //     SelfAdjointEigenSolver<MatrixXd> es(B);
-// //     MatrixXd ev = es.eigenvectors();
-// //     VectorXd first = ev.col(1) / ev.col(1).sum();
-// //     return ev.col(1);
-// // }
-//
-// // [[Rcpp::export]]
-// NumericVector sim_forward(NumericMatrix W, NumericMatrix V, double A0, double A1,
-//                           NumericMatrix D, NumericVector X, NumericVector Y) {
-//     int n = X.size();
-//     NumericVector Avec(n);
-//     Avec(0) = A0;
-//     NumericMatrix B = matrixAdd(scalarMult(A1, W), V);
-//     Avec(1) = A1;
-//     Y = matrixMult(B, Y);
-//     for(int i = 2; i < (n + 1); i++) {
-//         NumericMatrix VY = matrixMult(V, Y);
-//         NumericMatrix VVY = matrixMult(V, VY);
-//         NumericMatrix WY = matrixMult(W, Y);
-//         NumericMatrix VWY = matrixMult(VWY);
-//         double A = (X(i) - matrixMult(D, VVY) / matrixMult(D, VWY);
-//         Avec(i) = A;
-//         B = scalarMult(A, W) + V;
-//         Y = matrixMult(B, Y);
-//     }
-//     return Avec;
-// }
-//
-// // // [[Rcpp::export]]
-// // VectorXd forwardA(Map<MatrixXd> W, Map<MatrixXd> V, double startA, Map<VectorXd> X) {
-// //     VectorXd Avec;
-// //     for(int i = 0; i < X.size(); ++i) {
-// //         Avec(i) = X(i);
-// //     }
-// //     return(Avec);
-// // }
-//
+# include <RcppEigen.h>
+# include <Rcpp.h>
+
+// [[Rcpp::depends(RcppEigen)]]
+
+Eigen::MatrixXd makeB(Eigen::MatrixXd V, Eigen::MatrixXd W, double A) {
+    Eigen::MatrixXd B = A * W + V;
+    return B;
+}
+
+Eigen::VectorXd eigenY(Eigen::MatrixXd B) {
+    Eigen::EigenSolver<Eigen::MatrixXd> es(B);
+    Eigen::VectorXd vals = es.eigenvalues().real();
+    int j = 0;
+    for(int i = 0; i < vals.size(); i++) {
+        if(vals(i) == 1) {
+            j = i;
+        }
+    }
+    Eigen::VectorXd Y = es.eigenvectors().col(j).real();
+    Y = Y / Y.sum();
+    return Y;
+}
+
+// [[Rcpp::export]]
+SEXP simA1(const Eigen::Map<Eigen::MatrixXd> V,
+           const Eigen::Map<Eigen::MatrixXd> W,
+           const Eigen::Map<Eigen::VectorXd> D,
+           const Eigen::Map<Eigen::VectorXd> X,
+           const Eigen::Map<Eigen::VectorXd> inputA) {
+    Eigen::VectorXd A(X.size());
+    A(0) = inputA(0);
+    Eigen::MatrixXd B = makeB(V, W, inputA(0));
+    Eigen::VectorXd Y = eigenY(B);
+    for(int i = 1; i < X.size(); i++) {
+        double numer = X[i] - D.transpose() * V * Y;
+        double denom = D.transpose() * W * Y;
+        A[i] = (numer / denom);
+        B = makeB(V, W, A[i]);
+        Y = B * Y;
+    }
+    return Rcpp::wrap(A);
+}
+
+// [[Rcpp::export]]
+SEXP simA2(const Eigen::Map<Eigen::MatrixXd> V,
+           const Eigen::Map<Eigen::MatrixXd> W,
+           const Eigen::Map<Eigen::VectorXd> D,
+           const Eigen::Map<Eigen::VectorXd> X,
+           const Eigen::Map<Eigen::VectorXd> inputA) {
+
+    Eigen::MatrixXd B = makeB(V, W, inputA(0));
+
+    Eigen::VectorXd Y = eigenY(B);
+
+    B = makeB(V, W, inputA(1));
+
+    Y = B * Y;
+
+    Eigen::VectorXd A(X.size() - 1);
+    A(0) = inputA(1);
+    for(int i = 2; i < X.size(); i++) {
+        double numer = X[i] - D.transpose() * V * V * Y;
+        double denom = D.transpose() * V * W * Y;
+        A[i - 1] = (numer / denom);
+        B = makeB(V, W, A[i - 1]);
+        Y = B * Y;
+    }
+    return Rcpp::wrap(A);
+}
