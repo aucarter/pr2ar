@@ -4,6 +4,7 @@
 #' @param PAR A set of model parameters
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
+#' @export
 makeV = function(PAR, Bfn) {
     PAR$A = 0
     Bfn(PAR)
@@ -15,6 +16,7 @@ makeV = function(PAR, Bfn) {
 #' @param PAR A set of model parameters
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
+#' @export
 makeW = function(PAR, Bfn) {
     V = makeV(PAR, Bfn)
     (Bfn(PAR) - V)/PAR$A
@@ -24,6 +26,7 @@ makeW = function(PAR, Bfn) {
 #' prevalence
 #'
 #' @param PAR A set of model parameters
+#' @export
 makeD <- function(PAR) {
     In = PAR$In
     Cn = PAR$Cn
@@ -40,6 +43,7 @@ makeD <- function(PAR) {
 #' A function for making the matrix representation of the simple SIS model
 #'
 #' @param PAR A set of model parameters
+#' @export
 makeB <- function(PAR) {
     A = PAR$A
     Q = PAR$Q
@@ -51,6 +55,7 @@ makeB <- function(PAR) {
 #' drugs added
 #'
 #' @param PAR A set of model parameters
+#' @export
 makeBdrugs <- function(PAR) {
     A = PAR$A
     Q = PAR$Q
@@ -64,6 +69,7 @@ makeBdrugs <- function(PAR) {
 #' with overwriting superinfection
 #'
 #' @param PAR A set of model parameters
+#' @export
 makeBage <- function(PAR) {
     A = PAR$A
     Q = PAR$Q
@@ -90,6 +96,7 @@ makeBage <- function(PAR) {
 #' with overwriting superinfection and drugs
 #'
 #' @param PAR A set of model parameters
+#' @export
 makeBdrugs_age = function(PAR) {
     A = PAR$A
     Q = PAR$Q

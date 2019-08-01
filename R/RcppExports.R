@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 simA1 <- function(V, W, D, X, inputA) {
-    .Call('_pr2ar_simA1', PACKAGE = 'pr2ar', V, W, D, X, inputA)
+    .Call(`_pr2ar_simA1`, V, W, D, X, inputA)
 }
 
 simA2 <- function(V, W, D, X, inputA) {
-    .Call('_pr2ar_simA2', PACKAGE = 'pr2ar', V, W, D, X, inputA)
+    .Call(`_pr2ar_simA2`, V, W, D, X, inputA)
 }
 

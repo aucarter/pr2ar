@@ -24,14 +24,14 @@ pct <- proc.time()
 n = 4000
 Amat1 = matrix(nrow = 17, ncol = n)
 for(i in 1:n) {
-    Amat1[, i] = findA(V, W, D, X, inputA)
+    Amat1[, i] = simA2(V, W, D, X, inputA)
 }
 (proc.time() - pct)
 
 pct <- proc.time()
 Amat2 = matrix(nrow = 17, ncol = n)
 for(i in 1:n) {
-    Amat2[, i] = simAR(X, PAR, makeBdrugs_age)$A
+    Amat2[, i] = simAR(X, PAR, makeBdrugs_age, cpp = F)$A
 }
 (proc.time() - pct)
 

@@ -7,6 +7,7 @@
 #' @param showMessages Toggle for whether the function prints messages
 #' @param onlyAR Toggle for whether the function returns output other than a
 #' vector of attack-rates
+#' @export
 PR2AR <- function(X, PAR, eq = F, showMessages = F, onlyAR = F) {
     if (any(is.na(X))) {
         if (onlyAR) {

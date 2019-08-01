@@ -5,6 +5,7 @@
 #' @param PAR A set of model parameters
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
+#' @export
 AR2PRopt <- function(A, PAR, Bfn) {
     AR2PR(A, PAR, Bfn)$X
 }
@@ -15,6 +16,7 @@ AR2PRopt <- function(A, PAR, Bfn) {
 #' @param PAR A set of model parameters
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
+#' @export
 findAXmax <- function(PAR, Bfn) {
     opt <- stats::optimize(AR2PRopt, interval = c(0, 1), PAR, Bfn, maximum = T)
     A = opt$maximum
@@ -30,6 +32,7 @@ findAXmax <- function(PAR, Bfn) {
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
 #' @param showMessages Toggle for whether the function prints messages
+#' @export
 PR2AReq <- function(X, PAR, Bfn, showMessages = F) {
     A1X <- AR2PR(1, PAR, Bfn)
     max <- findAXmax(PAR, Bfn)

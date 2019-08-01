@@ -1,6 +1,6 @@
 pandoc: 2.7.3
-pkgdown: 1.3.0.9100
-pkgdown_sha: 7582f674ee59bba404c782bba367c146feb043e9
+pkgdown: 1.3.0
+pkgdown_sha: ~
 articles:
   PR2AR_Primer: PR2AR_Primer.html
 

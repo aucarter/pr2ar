@@ -3,6 +3,7 @@
 #' @param PAR A set of model parameters
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
+#' @export
 findYeq <- function(PAR, Bfn) {
     B = Bfn(PAR)
     e = eigen(B)
@@ -18,6 +19,7 @@ findYeq <- function(PAR, Bfn) {
 #' @param PAR A set of model parameters
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
+#' @export
 AR2PR <- function(A, PAR, Bfn) {
     D = makeD(PAR)
     PR = c()

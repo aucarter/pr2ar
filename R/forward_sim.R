@@ -16,7 +16,7 @@ fn <- function(A, PAR, Bfn, X) {
 #' @param Bfn A function for building the matrix represention of the system of
 #' equations that update the state vector
 #' @param X A prevalence rate
-## Find optimal A
+#' @export
 optimA <- function(X, PAR, Bfn) {
     A <- c()
     for(Xi in X) {
@@ -56,6 +56,7 @@ fn2 <- function(params, PAR, Bfn, X) {
 #' equations that update the state vector
 #' @param cpp A toggle for using the C++ version of the forward simulation
 #' algorithm
+#' @export
 simAR <- function(X, PAR, Bfn, cpp = T) {
     V = makeV(PAR, Bfn)
     W = makeW(PAR, Bfn)
