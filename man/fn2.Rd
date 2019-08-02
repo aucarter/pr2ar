@@ -5,10 +5,12 @@
 \title{Helper objective function for finding a pair of optimal attack-rates for a
 given pair of starting prevalence rates when the model has an exposure class}
 \usage{
-fn2(params, PAR, Bfn, X)
+fn2(params, Tx, PAR, Bfn, X)
 }
 \arguments{
 \item{params}{A pair of attack-rates}
+
+\item{Tx}{A vector of case-management rates}
 
 \item{PAR}{A set of model parameters}
 

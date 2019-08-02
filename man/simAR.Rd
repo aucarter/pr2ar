@@ -5,10 +5,12 @@
 \title{Generic forward simulation function that can accomdate models with and
 without exposure classes}
 \usage{
-simAR(X, PAR, Bfn, cpp = T)
+simAR(X, Tx, PAR, Bfn, cpp = T)
 }
 \arguments{
 \item{X}{A vector of prevalence rates}
+
+\item{Tx}{A vector of case-management rates}
 
 \item{PAR}{A set of model parameters}
 

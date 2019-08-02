@@ -5,10 +5,12 @@
 \title{Finds the equilibrium attack-rates for an input vector of prevalences,
 conditional on the chosen model and parameters}
 \usage{
-PR2AReq(X, PAR, Bfn, showMessages = F)
+PR2AReq(X, Tx, PAR, Bfn, showMessages = F)
 }
 \arguments{
 \item{X}{A vector of prevalence rates}
+
+\item{Tx}{A vector of case-management rates}
 
 \item{PAR}{A set of model parameters}
 

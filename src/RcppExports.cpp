@@ -7,32 +7,32 @@
 using namespace Rcpp;
 
 // simA1
-SEXP simA1(const Eigen::Map<Eigen::MatrixXd> V, const Eigen::Map<Eigen::MatrixXd> W, const Eigen::Map<Eigen::VectorXd> D, const Eigen::Map<Eigen::VectorXd> X, const Eigen::Map<Eigen::VectorXd> inputA);
-RcppExport SEXP _pr2ar_simA1(SEXP VSEXP, SEXP WSEXP, SEXP DSEXP, SEXP XSEXP, SEXP inputASEXP) {
+SEXP simA1(const double Q, const Eigen::Map<Eigen::VectorXd> D, const Eigen::Map<Eigen::VectorXd> X, const Eigen::Map<Eigen::VectorXd> Tx, const Eigen::Map<Eigen::VectorXd> inputA);
+RcppExport SEXP _pr2ar_simA1(SEXP QSEXP, SEXP DSEXP, SEXP XSEXP, SEXP TxSEXP, SEXP inputASEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd> >::type V(VSEXP);
-    Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd> >::type W(WSEXP);
+    Rcpp::traits::input_parameter< const double >::type Q(QSEXP);
     Rcpp::traits::input_parameter< const Eigen::Map<Eigen::VectorXd> >::type D(DSEXP);
     Rcpp::traits::input_parameter< const Eigen::Map<Eigen::VectorXd> >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const Eigen::Map<Eigen::VectorXd> >::type Tx(TxSEXP);
     Rcpp::traits::input_parameter< const Eigen::Map<Eigen::VectorXd> >::type inputA(inputASEXP);
-    rcpp_result_gen = Rcpp::wrap(simA1(V, W, D, X, inputA));
+    rcpp_result_gen = Rcpp::wrap(simA1(Q, D, X, Tx, inputA));
     return rcpp_result_gen;
 END_RCPP
 }
 // simA2
-SEXP simA2(const Eigen::Map<Eigen::MatrixXd> V, const Eigen::Map<Eigen::MatrixXd> W, const Eigen::Map<Eigen::VectorXd> D, const Eigen::Map<Eigen::VectorXd> X, const Eigen::Map<Eigen::VectorXd> inputA);
-RcppExport SEXP _pr2ar_simA2(SEXP VSEXP, SEXP WSEXP, SEXP DSEXP, SEXP XSEXP, SEXP inputASEXP) {
+SEXP simA2(const double Q, const Eigen::Map<Eigen::VectorXd> D, const Eigen::Map<Eigen::VectorXd> X, const Eigen::Map<Eigen::VectorXd> Tx, const Eigen::Map<Eigen::VectorXd> inputA);
+RcppExport SEXP _pr2ar_simA2(SEXP QSEXP, SEXP DSEXP, SEXP XSEXP, SEXP TxSEXP, SEXP inputASEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd> >::type V(VSEXP);
-    Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd> >::type W(WSEXP);
+    Rcpp::traits::input_parameter< const double >::type Q(QSEXP);
     Rcpp::traits::input_parameter< const Eigen::Map<Eigen::VectorXd> >::type D(DSEXP);
     Rcpp::traits::input_parameter< const Eigen::Map<Eigen::VectorXd> >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const Eigen::Map<Eigen::VectorXd> >::type Tx(TxSEXP);
     Rcpp::traits::input_parameter< const Eigen::Map<Eigen::VectorXd> >::type inputA(inputASEXP);
-    rcpp_result_gen = Rcpp::wrap(simA2(V, W, D, X, inputA));
+    rcpp_result_gen = Rcpp::wrap(simA2(Q, D, X, Tx, inputA));
     return rcpp_result_gen;
 END_RCPP
 }

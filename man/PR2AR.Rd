@@ -4,10 +4,12 @@
 \alias{PR2AR}
 \title{Master function for converting prevalence rates into attack-rates}
 \usage{
-PR2AR(X, PAR, eq = F, showMessages = F, cpp = T)
+PR2AR(X, Tx, PAR, eq = F, showMessages = F, cpp = T)
 }
 \arguments{
 \item{X}{A vector of prevalence rates}
+
+\item{Tx}{A vector of case-management rates}
 
 \item{PAR}{A set of parameters for the mechanistic model of malaria}
 

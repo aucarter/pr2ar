@@ -1,6 +1,7 @@
 #' Master function for converting prevalence rates into attack-rates
 #'
 #' @param X A vector of prevalence rates
+#' @param Tx A vector of case-management rates
 #' @param PAR A set of parameters for the mechanistic model of malaria
 #' @param eq Toggle for whether to calculate all attack-rates at equilibrium or
 #' to only calculate the initial states at equilibrium and simulate forward
@@ -8,7 +9,7 @@
 #' @param cpp A toggle for using the C++ version of the forward simulation
 #' algorithm
 #' @export
-PR2AR <- function(X, PAR, eq = F, showMessages = F, cpp = T) {
+PR2AR <- function(X, Tx, PAR, eq = F, showMessages = F, cpp = T) {
     if (any(is.na(X))) {
         if (!eq) {
             return(rep(NA, length(X)))
@@ -26,9 +27,9 @@ PR2AR <- function(X, PAR, eq = F, showMessages = F, cpp = T) {
         Bfn = makeB
     }
     if (eq) {
-        outA <- PR2AReq(X, PAR, Bfn, showMessages)
+        outA <- PR2AReq(X, Tx, PAR, Bfn, showMessages)
     } else {
-        outA <- simAR(X, PAR, Bfn, cpp = cpp)
-        return(outA)
+        outA <- simAR(X, Tx, PAR, Bfn, cpp = cpp)
     }
+    return(outA)
 }

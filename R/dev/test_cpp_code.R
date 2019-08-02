@@ -11,7 +11,8 @@ PAR$In = 5
 PAR$Cn = 2
 PAR$rho = 0.1
 
-
+makeB(PAR$A, PAR$Q, PAR$rho)
+makeBdrugs_age(PAR)
 Bfn = makeBdrugs_age
 Y = findYeq(PAR, Bfn)
 D = makeD(PAR)
@@ -19,6 +20,9 @@ W = makeW(PAR, Bfn)
 V = makeV(PAR, Bfn)
 X = rnorm(18, 1, 0.05) * seq(0.5, 0.7, length.out = 18)
 inputA = optim(fn = fn2, par = c(0, 0.1), PAR = PAR, Bfn = Bfn, X = X)$par
+Tx <- seq(0.05, 0.3, length.out = 20)
+
+simA2(PAR$Q, D, X, Tx, inputA)
 
 pct <- proc.time()
 n = 4000

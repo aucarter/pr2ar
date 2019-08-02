@@ -5,10 +5,12 @@
 \title{Calculate the prevalence rate and treatment rate for a given attack-rate,
 model, and set of model parameters}
 \usage{
-AR2PR(A, PAR, Bfn)
+AR2PR(A, Tx, PAR, Bfn)
 }
 \arguments{
-\item{A}{An attack-rate}
+\item{A}{A vector of attack-rates}
+
+\item{Tx}{A vector of case-management rates}
 
 \item{PAR}{A set of model parameters}
 
