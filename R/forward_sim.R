@@ -104,5 +104,5 @@ simAR <- function(X, PAR, Bfn, cpp = T) {
 
     }
     # return(list(A = outA, Y = outY))
-    return(list(A = outA))
+    return(outA)
 }
