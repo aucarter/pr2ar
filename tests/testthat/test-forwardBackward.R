@@ -14,6 +14,6 @@ test_that("Prevalence generated from a specific attack-rate can be recovered", {
         Y = B%*%Y
         X = c(X, D%*%Y)
     }
-    AR2 = PR2AR(X, PAR)$A
+    AR2 = PR2AR(X, PAR)
     expect_less_than(sum(head(AR, -1) - AR2), 0.0001)
 })

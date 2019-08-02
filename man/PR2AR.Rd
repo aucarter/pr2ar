@@ -4,7 +4,7 @@
 \alias{PR2AR}
 \title{Master function for converting prevalence rates into attack-rates}
 \usage{
-PR2AR(X, PAR, eq = F, showMessages = F, onlyAR = F)
+PR2AR(X, PAR, eq = F, showMessages = F, cpp = T)
 }
 \arguments{
 \item{X}{A vector of prevalence rates}
@@ -16,8 +16,8 @@ to only calculate the initial states at equilibrium and simulate forward}
 
 \item{showMessages}{Toggle for whether the function prints messages}
 
-\item{onlyAR}{Toggle for whether the function returns output other than a
-vector of attack-rates}
+\item{cpp}{A toggle for using the C++ version of the forward simulation
+algorithm}
 }
 \description{
 Master function for converting prevalence rates into attack-rates
