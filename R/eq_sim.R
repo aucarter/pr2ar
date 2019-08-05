@@ -7,7 +7,7 @@
 #' equations that update the state vector
 #' @export
 AR2PRopt <- function(A, PAR, Bfn) {
-    AR2PR(A, PAR, Bfn)$X
+    AR2PR(A, PAR$rho, PAR, Bfn)$X
 }
 
 #' Finds the maximum prevalence and associated attack-rate for a given model and
