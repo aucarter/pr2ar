@@ -18,9 +18,3 @@ if (!require("devtools")) {
 devtools::install_github("aucarter/pr2ar", dependencies = TRUE, build_vignettes = TRUE)
 ```
 
-### Examples
-
-### Getting started 
-
-### Resources
-
