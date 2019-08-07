@@ -16,7 +16,7 @@ plotAR2PR <- function(PAR, Bfn, AR_range = c(0.01, 1), logX = T, logY = F,
     dt <- data.table()
     for(rho_i in rho) {
         PAR$rho <- rho_i
-        PR <- AR2PR(AR, PAR, Bfn)
+        PR <- AR2PR(AR, Tx = rep(rho_i, length(AR)), PAR, Bfn)
         X_i = PR$X
         C_i = PR$C
         add.dt <-  data.table(AR = AR, rho = rho_i, X = X_i, C = C_i)
@@ -24,11 +24,13 @@ plotAR2PR <- function(PAR, Bfn, AR_range = c(0.01, 1), logX = T, logY = F,
     }
 
     # Plot
-    gg <- ggplot(dt, aes(x = AR, y = X)) + geom_line() + facet_wrap(~rho) +
-        theme_classic() +
-        labs(title = "Attack-rate and PfPR for different case management rates",
-             subtitle = paste0("Anti-malarial drug use w/o confirmed malaria: ", PAR$d)) +
-        xlab("Attack-rate") + ylab("PfPR")
+    AR <- X <- C <- NULL # annoying thing for checker
+     gg <- ggplot(dt, aes(x = AR, y = X)) + geom_line() + facet_wrap(~rho) +
+         theme_classic() +
+         labs(title = "Attack-rate and PfPR for different case management rates",
+              subtitle = paste0("Anti-malarial drug use w/o confirmed malaria: ", PAR$d)) +
+         xlab("Attack-rate") + ylab("PfPR")
+
     if(logX) {
         gg = gg + scale_x_continuous(trans='log10')
     }
@@ -41,11 +43,11 @@ plotAR2PR <- function(PAR, Bfn, AR_range = c(0.01, 1), logX = T, logY = F,
         top.dt <- copy(dt)[, C := 0]
         top.dt <- top.dt[nrow(top.dt) - 1:nrow(top.dt) + 1]
         poly.dt <- rbind(dt, top.dt)
-        gg = gg + geom_polygon(data = poly.dt, aes(x= AR, y = (1-C), fill = "Treated"), alpha = 0.5) +
-            theme(legend.position="bottom", legend.title = element_blank())
+        gg <- gg + geom_polygon(data = poly.dt, aes(x= AR, y = (1-C), fill = "Treated"), alpha = 0.5) +
+             theme(legend.position="bottom", legend.title = element_blank())
     }
     if(plotXover1_C) {
-        gg = gg + geom_line(aes(x = AR, y = X / (1 - C)), color = "red")
+        gg <- gg + geom_line(aes(x = AR, y = X / (1 - C)), color = "red")
     }
     gg
 }

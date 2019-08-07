@@ -38,7 +38,7 @@ AR2PR <- function(A, Tx, PAR, Bfn) {
             }
         }
     }
-    if (length(eq) == 3) {
+    if (PAR$Cn > 0) {
         out.list = list(X = PR, C = C)
     } else {
         out.list = list(X = PR)
