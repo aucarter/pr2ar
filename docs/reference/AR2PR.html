@@ -89,6 +89,9 @@ model, and set of model parameters" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/MAP_example.html">MAP_example</a>
+    </li>
+    <li>
       <a href="../articles/PR2AR_Primer.html">PR2AR_Primer</a>
     </li>
   </ul>
@@ -122,14 +125,18 @@ model, and set of model parameters</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>AR2PR</span>(<span class='no'>A</span>, <span class='no'>PAR</span>, <span class='no'>Bfn</span>)</pre>
+    <pre class="usage"><span class='fu'>AR2PR</span>(<span class='no'>A</span>, <span class='no'>Tx</span>, <span class='no'>PAR</span>, <span class='no'>Bfn</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>A</th>
-      <td><p>An attack-rate</p></td>
+      <td><p>A vector of attack-rates</p></td>
+    </tr>
+    <tr>
+      <th>Tx</th>
+      <td><p>A vector of case-management rates</p></td>
     </tr>
     <tr>
       <th>PAR</th>

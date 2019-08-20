@@ -86,6 +86,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/MAP_example.html">MAP_example</a>
+    </li>
+    <li>
       <a href="../articles/PR2AR_Primer.html">PR2AR_Primer</a>
     </li>
   </ul>
@@ -117,7 +120,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>aggAR</span>(<span class='no'>A</span>, <span class='no'>dt</span>)</pre>
+    <pre class="usage"><span class='fu'>aggAR</span>(<span class='no'>A</span>, <span class='no'>inStep</span>, <span class='no'>outStep</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -127,8 +130,12 @@
       <td><p>A vector of attack-rates</p></td>
     </tr>
     <tr>
-      <th>dt</th>
-      <td><p>length of time step</p></td>
+      <th>inStep</th>
+      <td><p>Input interval size in days</p></td>
+    </tr>
+    <tr>
+      <th>outStep</th>
+      <td><p>output interval size in days</p></td>
     </tr>
     </table>
     

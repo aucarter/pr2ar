@@ -86,6 +86,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/MAP_example.html">MAP_example</a>
+    </li>
+    <li>
       <a href="../articles/PR2AR_Primer.html">PR2AR_Primer</a>
     </li>
   </ul>
@@ -117,7 +120,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>PR2AR</span>(<span class='no'>X</span>, <span class='no'>PAR</span>, <span class='kw'>eq</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>showMessages</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>onlyAR</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+    <pre class="usage"><span class='fu'>PR2AR</span>(<span class='no'>X</span>, <span class='no'>Tx</span>, <span class='no'>PAR</span>, <span class='kw'>Xinterval</span> <span class='kw'>=</span> <span class='fl'>365</span>, <span class='kw'>eq</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>showMessages</span> <span class='kw'>=</span> <span class='no'>F</span>,
+  <span class='kw'>cpp</span> <span class='kw'>=</span> <span class='no'>T</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -127,8 +131,16 @@
       <td><p>A vector of prevalence rates</p></td>
     </tr>
     <tr>
+      <th>Tx</th>
+      <td><p>A vector of case-management rates</p></td>
+    </tr>
+    <tr>
       <th>PAR</th>
       <td><p>A set of parameters for the mechanistic model of malaria</p></td>
+    </tr>
+    <tr>
+      <th>Xinterval</th>
+      <td><p>An integer with the number of days between PR observations</p></td>
     </tr>
     <tr>
       <th>eq</th>
@@ -140,9 +152,9 @@ to only calculate the initial states at equilibrium and simulate forward</p></td
       <td><p>Toggle for whether the function prints messages</p></td>
     </tr>
     <tr>
-      <th>onlyAR</th>
-      <td><p>Toggle for whether the function returns output other than a
-vector of attack-rates</p></td>
+      <th>cpp</th>
+      <td><p>A toggle for using the C++ version of the forward simulation
+algorithm</p></td>
     </tr>
     </table>
     

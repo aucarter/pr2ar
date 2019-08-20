@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection — makeBage • pr2ar</title>
+<title>Interpolate a vector of rates to match the model time step — interpRates • pr2ar</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,11 +30,9 @@ with overwriting superinfection — makeBage • pr2ar</title>
 
 
 
-<meta property="og:title" content="A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection — makeBage" />
+<meta property="og:title" content="Interpolate a vector of rates to match the model time step — interpRates" />
 
-<meta property="og:description" content="A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection" />
+<meta property="og:description" content="Interpolate a vector of rates to match the model time step" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -112,27 +109,33 @@ with overwriting superinfection" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection</h1>
+    <h1>Interpolate a vector of rates to match the model time step</h1>
     
-    <div class="hidden name"><code>makeBage.Rd</code></div>
+    <div class="hidden name"><code>interpRates.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection</p>
+    <p>Interpolate a vector of rates to match the model time step</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>makeBage</span>(<span class='no'>PAR</span>)</pre>
+    <pre class="usage"><span class='fu'>interpRates</span>(<span class='no'>rates</span>, <span class='kw'>inStep</span> <span class='kw'>=</span> <span class='fl'>365</span>, <span class='kw'>outStep</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>PAR</th>
-      <td><p>A set of model parameters</p></td>
+      <th>rates</th>
+      <td><p>A vector of rates</p></td>
+    </tr>
+    <tr>
+      <th>inStep</th>
+      <td><p>Input interval size in days</p></td>
+    </tr>
+    <tr>
+      <th>outStep</th>
+      <td><p>output interval size in days</p></td>
     </tr>
     </table>
     

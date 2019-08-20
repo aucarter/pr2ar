@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection — makeBage • pr2ar</title>
+<title>Make plots showing the relationship between AR and PR for a number of different Tx levels — plotAR2PR • pr2ar</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,11 +30,9 @@ with overwriting superinfection — makeBage • pr2ar</title>
 
 
 
-<meta property="og:title" content="A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection — makeBage" />
+<meta property="og:title" content="Make plots showing the relationship between AR and PR for a number of different Tx levels — plotAR2PR" />
 
-<meta property="og:description" content="A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection" />
+<meta property="og:description" content="Make plots showing the relationship between AR and PR for a number of different Tx levels" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -112,27 +109,50 @@ with overwriting superinfection" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection</h1>
+    <h1>Make plots showing the relationship between AR and PR for a number of different Tx levels</h1>
     
-    <div class="hidden name"><code>makeBage.Rd</code></div>
+    <div class="hidden name"><code>plotAR2PR.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for making the matrix representation of the age of infection (AoI)
-with overwriting superinfection</p>
+    <p>Make plots showing the relationship between AR and PR for a number of different Tx levels</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>makeBage</span>(<span class='no'>PAR</span>)</pre>
+    <pre class="usage"><span class='fu'>plotAR2PR</span>(<span class='no'>PAR</span>, <span class='no'>Bfn</span>, <span class='kw'>AR_range</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.01</span>, <span class='fl'>1</span>), <span class='kw'>logX</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>logY</span> <span class='kw'>=</span> <span class='no'>F</span>,
+  <span class='kw'>plotC</span> <span class='kw'>=</span> <span class='no'>T</span>, <span class='kw'>plotXover1_C</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>PAR</th>
-      <td><p>A set of model parameters</p></td>
+      <td><p>Model parameters</p></td>
+    </tr>
+    <tr>
+      <th>Bfn</th>
+      <td><p>Function for the model</p></td>
+    </tr>
+    <tr>
+      <th>AR_range</th>
+      <td><p>Min and max of the range of AR plotted</p></td>
+    </tr>
+    <tr>
+      <th>logX</th>
+      <td><p>Toggle for taking the log of the x-axis</p></td>
+    </tr>
+    <tr>
+      <th>logY</th>
+      <td><p>Toggle for taking the log of the y-axis</p></td>
+    </tr>
+    <tr>
+      <th>plotC</th>
+      <td><p>Toggle for plotting the proportion treated</p></td>
+    </tr>
+    <tr>
+      <th>plotXover1_C</th>
+      <td><p>Toggle for plotting PR relative to those not on Tx</p></td>
     </tr>
     </table>
     

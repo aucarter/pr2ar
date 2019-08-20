@@ -1,6 +1,6 @@
 ---
 title: "MAP_example"
-output: rmarkdown::html_vignette
+output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{MAP_example}
   %\VignetteEngine{knitr::rmarkdown}

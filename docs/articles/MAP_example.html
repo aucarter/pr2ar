@@ -92,7 +92,7 @@
 <span id="cb2-5"><a href="#cb2-5"></a><span class="co">## Pull shapefile and PfPR raster</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a>shp &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/malariaAtlas/topics/getShp">getShp</a></span>(<span class="dt">ISO =</span> loc)</span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; OGR data source with driver: ESRI Shapefile </span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; Source: "/private/var/folders/t6/j4gcn9yx16j9dmx6mm3nflzm0000gp/T/RtmpGWaAQ3/shp/shpb6ca2c1dc77d/mapadmin_0_2018.shp", layer: "mapadmin_0_2018"</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; Source: "/private/var/folders/t6/j4gcn9yx16j9dmx6mm3nflzm0000gp/T/RtmpIPJbQ6/shp/shpc3b21f38cc5d/mapadmin_0_2018.shp", layer: "mapadmin_0_2018"</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; with 1 features</span></span>
 <span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; It has 8 fields</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a>PfPR2_<span class="dv">10</span> &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/malariaAtlas/topics/getRaster">getRaster</a></span>(<span class="dt">surface =</span> <span class="st">"Plasmodium falciparum PR2-10"</span>, <span class="dt">shp =</span> shp, <span class="dt">year =</span> years)</span>
