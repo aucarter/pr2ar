@@ -14,7 +14,8 @@ Imports:
     stats,
     Rcpp,
     data.table,
-    ggplot2
+    ggplot2,
+    malariaAtlas
 LinkingTo:
     RcppEigen,
     Rcpp

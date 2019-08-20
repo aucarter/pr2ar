@@ -194,7 +194,7 @@ PR2AReq <- function(X, PAR, Bfn, optim = T) {
 
 
 ## Forward Simulation vs. Steady State
-Of course, we don't know $Y_t$ but we do know $X_t$, estimated $Pf$PR. We let $D$ denote the row vector that maps $Y$ onto $X$: $D = \left<0,1 \right>$ and 
+Of course, we don't know $Y_t$ but we do know $X_t$, estimated $Pf$PR at time $t$. We let $D$ denote the row vector that maps $Y$ onto $X$: $D = \left<0,1 \right>$ and 
 $$X = D \cdot Y = \left[ 
 \begin{array}{cc}
 0 & 1
@@ -208,6 +208,8 @@ To solve for the scalar $A_t$, we simply solve the two-step equation $$D Y_{t+1}
 = D B Y_t = D \left( A_t W Y_t +  V Y_t \right),$$
 so 
 $$A_t = \left( X_{t + 1} - D V Y_t  \right) / \left( D W Y_t \right).$$ 
+
+This enables an inductive procedure where we only need to estimate an initial state vector, $Y_0$, and attack-rate, $A_0$, and all future values can be calculated sequentially... like dominoes!
 
 ```{r}
 ## Compare steady state solutions to forward simulation
@@ -352,7 +354,7 @@ plotAR2PR <- function(PAR, Bfn, AR_range = c(0.01, 1), logX = T, logY = F,
   # Plot
   gg <- ggplot(dt, aes(x = AR, y = X)) + geom_line() + facet_wrap(~rho) + 
     theme_classic() + 
-      labs(title = "Attack-rate and PfPR for different case management rates",
+      labs(title = "Steady-state attack-rate and PfPR for different case management rates",
            subtitle = paste0("Anti-malarial drug use w/o confirmed malaria: ", PAR$d)) +
     xlab("Attack-rate") + ylab("PfPR")
   if(logX) {
@@ -380,7 +382,7 @@ plotAR2PR(PAR, makeBdrugs)
 ```
 
 ## $Pf$PR Thresholds and AR2PR Monotonicity
-As can be seen in the preceding plots, for a given level of drug use there are levels of $Pf$PR that are not plausible. These thresholds can assist with identifying a disconnect between estimated case management and $Pf$PR. In addition, the relationship between AR and PR is not monotonic for certain levels of treatment, leading to two solutions for a given $Pf$PR that exceeds the PR associated with an AR of 1 but is less than the maximum allowable PR. In order to address both of these phenomenon we will introduce boundary conditions and report both possible AR values when convert from $Pf$PR to AR.
+As can be seen in the preceding plots, for a given level of drug use there are levels of $Pf$PR that are not plausible. These thresholds can assist with identifying a disconnect between estimated case management and $Pf$PR. In addition, the relationship between AR and PR is not monotonic for certain levels of treatment, leading to two solutions for a given $Pf$PR that exceeds the PR associated with an AR of 1 but is less than the maximum allowable PR. In order to address both of these problems we will introduce boundary conditions and report both possible AR values when converting from $Pf$PR to AR.
 
 ```{r}
 AR2PRopt <- function(A, PAR, Bfn) {
@@ -447,6 +449,8 @@ PR2AReq <- function(X, PAR, Bfn) {
   }
   return(outList)
 }
+
+# Simulate X that exceeds PfPR(A=1) and maximum PfPR
 X = seq(0.05, 0.35, 0.01)
 X = (1 + 0.1*sin(seq(0, length(X), length.out = length(X))))*X
 plot(X, type = "l")
@@ -838,6 +842,14 @@ abline(h = max$X, col = "red")
 lines(forwardA, lty = "dashed")
 legend("topleft", legend = c("Steady", "Forward"), lty = 1:2)
 ```
+
+## Dynamic Treatment Rates and Generic Solution to Exposure Lags
+Rather than forcing treatment rates to be static throughout the simulation, we would rather be able to supply a vector of treatment rates with equal length to input PfPR. This extra layer of complication means that matrices $V$ and $W$ are no longer time invariant and must be recalculated at each time step. Furthermore, forward simulation in the presence of an exposure-based lag requires the multiple 
+
+$$D Y_{t+2} = X_{t+2} = D B_{t+1} B_{t} Y_t = D(A_{t+1}W_{t+1} + V_{t+1})(A_t W_t + V_t) Y_t = D(A_t A_{t+1} W_{t+1}W_t + A_{t+1} W_{t+1} V_t + A_t V_{t+1} W_t + V_{t+1}V_t) Y_t$$
+
+$$ A_t | \ell = \frac{X_{t+1 + \ell} - D \prod_{i = 0}^{\ell}(V_{t + i}) Y_t}  {D \prod_{i = 0}^{\ell - 1}(V_{t + i}) W_t Y_t}$$
+where $\ell$ is the length of the lag in time steps.
 
 ## Heterogeneity in Attack-Rates
 

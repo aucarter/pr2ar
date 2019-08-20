@@ -53,6 +53,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/MAP_example.html">MAP_example</a>
+    </li>
+    <li>
       <a href="../articles/PR2AR_Primer.html">PR2AR_Primer</a>
     </li>
   </ul>
@@ -83,7 +86,7 @@
 <div id="motivation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h2>
-<p><span class="math inline">\(Pf\)</span>PR is the most frequently measured and estimated malaria metric, making it familiar to both modelers and policy makers. Despite its ubiquity, <span class="math inline">\(Pf\)</span>PR has substantial limitations as intelligence for policy development. Primarily, a given level of <span class="math inline">\(Pf\)</span>PR can be associated with a variety of transmission intensities based on differing levels of immunity, case detection rates, vector control, ages of infection, among other factors. The attack-rate, <span class="math inline">\(A(t)\)</span>, measures the probability of acquiring an infection during a time period of length <span class="math inline">\(t\)</span>. By developing an algorithm to simulate the latent attack-rate associated with a given time-series of <span class="math inline">\(Pf\)</span>PR, we enable investigation of risk of malaria infection. Measuring attack-rate – or force of infection (FoI) – directly requires cohort studies which are not universally available and can be expensive to conduct. Deriving estimates of attack-rate from <span class="math inline">\(Pf\)</span>PR with uniform methods allows for comparison of risk of malaria infection across locations and over time.</p>
+<p><em>Plasmodium falciparum</em> parasite rate (<span class="math inline">\(Pf\)</span>PR) – the proportion of the population testing positive for malaria – is the most frequently measured and estimated malaria metric, making it familiar to both modelers and policy makers. Despite its ubiquity, <span class="math inline">\(Pf\)</span>PR has substantial limitations as intelligence for policy development. Primarily, a given level of <span class="math inline">\(Pf\)</span>PR can be associated with a variety of transmission intensities based on differing levels of immunity, multiplicity of infection, case detection rates, vector control, age of infections, among other factors. The attack-rate, <span class="math inline">\(A(t)\)</span>, measures the probability of acquiring an infection during a time period of length <span class="math inline">\(t\)</span>. By developing an algorithm to simulate the latent attack-rate associated with a given time-series of <span class="math inline">\(Pf\)</span>PR, we enable investigation of risk of malaria infection. Measuring attack-rate – or force of infection (FoI) – directly requires cohort studies which are not universally available and can be expensive to conduct. Deriving estimates of attack-rate from <span class="math inline">\(Pf\)</span>PR with uniform methods allows for comparison of risk of malaria infection across locations and over time.</p>
 </div>
 <div id="a-bad-start" class="section level2">
 <h2 class="hasAnchor">
@@ -247,7 +250,7 @@ A &amp;  -(1-A)(1-Q)\\
 <div id="forward-simulation-vs--steady-state" class="section level2">
 <h2 class="hasAnchor">
 <a href="#forward-simulation-vs--steady-state" class="anchor"></a>Forward Simulation vs. Steady State</h2>
-<p>Of course, we don’t know <span class="math inline">\(Y_t\)</span> but we do know <span class="math inline">\(X_t\)</span>, estimated <span class="math inline">\(Pf\)</span>PR. We let <span class="math inline">\(D\)</span> denote the row vector that maps <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>: <span class="math inline">\(D = \left&lt;0,1 \right&gt;\)</span> and <span class="math display">\[X = D \cdot Y = \left[ 
+<p>Of course, we don’t know <span class="math inline">\(Y_t\)</span> but we do know <span class="math inline">\(X_t\)</span>, estimated <span class="math inline">\(Pf\)</span>PR at time <span class="math inline">\(t\)</span>. We let <span class="math inline">\(D\)</span> denote the row vector that maps <span class="math inline">\(Y\)</span> onto <span class="math inline">\(X\)</span>: <span class="math inline">\(D = \left&lt;0,1 \right&gt;\)</span> and <span class="math display">\[X = D \cdot Y = \left[ 
 \begin{array}{cc}
 0 &amp; 1
 \end{array} \right] \cdot 
@@ -257,6 +260,7 @@ S\\
 X\\
 \end{array} \right] \]</span> To solve for the scalar <span class="math inline">\(A_t\)</span>, we simply solve the two-step equation <span class="math display">\[D Y_{t+1} 
 = D B Y_t = D \left( A_t W Y_t +  V Y_t \right),\]</span> so <span class="math display">\[A_t = \left( X_{t + 1} - D V Y_t  \right) / \left( D W Y_t \right).\]</span></p>
+<p>This enables an inductive procedure where we only need to estimate an initial state vector, <span class="math inline">\(Y_0\)</span>, and attack-rate, <span class="math inline">\(A_0\)</span>, and all future values can be calculated sequentially… like dominoes!</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## Compare steady state solutions to forward simulation</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>D =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
 <span id="cb4-3"><a href="#cb4-3"></a>X =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.01</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="fl">0.59</span>, <span class="fl">0.3</span>, <span class="fl">-0.01</span>))</span>
@@ -396,7 +400,7 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb6-45"><a href="#cb6-45"></a>  <span class="co"># Plot</span></span>
 <span id="cb6-46"><a href="#cb6-46"></a>  gg &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dt, <span class="kw">aes</span>(<span class="dt">x =</span> AR, <span class="dt">y =</span> X)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>rho) <span class="op">+</span><span class="st"> </span></span>
 <span id="cb6-47"><a href="#cb6-47"></a><span class="st">    </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-48"><a href="#cb6-48"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Attack-rate and PfPR for different case management rates"</span>,</span>
+<span id="cb6-48"><a href="#cb6-48"></a><span class="st">      </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">"Steady-state attack-rate and PfPR for different case management rates"</span>,</span>
 <span id="cb6-49"><a href="#cb6-49"></a>           <span class="dt">subtitle =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"Anti-malarial drug use w/o confirmed malaria: "</span>, PAR<span class="op">$</span>d)) <span class="op">+</span></span>
 <span id="cb6-50"><a href="#cb6-50"></a><span class="st">    </span><span class="kw">xlab</span>(<span class="st">"Attack-rate"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">"PfPR"</span>)</span>
 <span id="cb6-51"><a href="#cb6-51"></a>  <span class="cf">if</span>(logX) {</span>
@@ -420,13 +424,13 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb6-69"><a href="#cb6-69"></a>  gg</span>
 <span id="cb6-70"><a href="#cb6-70"></a>}</span>
 <span id="cb6-71"><a href="#cb6-71"></a></span>
-<span id="cb6-72"><a href="#cb6-72"></a><span class="kw">plotAR2PR</span>(PAR, makeBdrugs)</span></code></pre></div>
+<span id="cb6-72"><a href="#cb6-72"></a><span class="kw"><a href="../reference/plotAR2PR.html">plotAR2PR</a></span>(PAR, makeBdrugs)</span></code></pre></div>
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
 </div>
 <div id="pfpr-thresholds-and-ar2pr-monotonicity" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pfpr-thresholds-and-ar2pr-monotonicity" class="anchor"></a><span class="math inline">\(Pf\)</span>PR Thresholds and AR2PR Monotonicity</h2>
-<p>As can be seen in the preceding plots, for a given level of drug use there are levels of <span class="math inline">\(Pf\)</span>PR that are not plausible. These thresholds can assist with identifying a disconnect between estimated case management and <span class="math inline">\(Pf\)</span>PR. In addition, the relationship between AR and PR is not monotonic for certain levels of treatment, leading to two solutions for a given <span class="math inline">\(Pf\)</span>PR that exceeds the PR associated with an AR of 1 but is less than the maximum allowable PR. In order to address both of these phenomenon we will introduce boundary conditions and report both possible AR values when convert from <span class="math inline">\(Pf\)</span>PR to AR.</p>
+<p>As can be seen in the preceding plots, for a given level of drug use there are levels of <span class="math inline">\(Pf\)</span>PR that are not plausible. These thresholds can assist with identifying a disconnect between estimated case management and <span class="math inline">\(Pf\)</span>PR. In addition, the relationship between AR and PR is not monotonic for certain levels of treatment, leading to two solutions for a given <span class="math inline">\(Pf\)</span>PR that exceeds the PR associated with an AR of 1 but is less than the maximum allowable PR. In order to address both of these problems we will introduce boundary conditions and report both possible AR values when converting from <span class="math inline">\(Pf\)</span>PR to AR.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>AR2PRopt &lt;-<span class="st"> </span><span class="cf">function</span>(A, PAR, Bfn) {</span>
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw"><a href="../reference/AR2PR.html">AR2PR</a></span>(A, PAR, Bfn)<span class="op">$</span>X</span>
 <span id="cb7-3"><a href="#cb7-3"></a>}</span>
@@ -496,10 +500,12 @@ C_{t+1} &amp;= (\delta + (1-\delta)\rho A_t ) S_t + (\rho A_t + \delta) X_t  + \
 <span id="cb7-67"><a href="#cb7-67"></a>  }</span>
 <span id="cb7-68"><a href="#cb7-68"></a>  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(outList)</span>
 <span id="cb7-69"><a href="#cb7-69"></a>}</span>
-<span id="cb7-70"><a href="#cb7-70"></a>X =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="fl">0.05</span>, <span class="fl">0.35</span>, <span class="fl">0.01</span>)</span>
-<span id="cb7-71"><a href="#cb7-71"></a>X =<span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span><span class="op">*</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Trig">sin</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(X), <span class="dt">length.out =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(X))))<span class="op">*</span>X</span>
-<span id="cb7-72"><a href="#cb7-72"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(X, <span class="dt">type =</span> <span class="st">"l"</span>)</span>
-<span id="cb7-73"><a href="#cb7-73"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/abline">abline</a></span>(<span class="dt">h =</span> max<span class="op">$</span>X, <span class="dt">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
+<span id="cb7-70"><a href="#cb7-70"></a></span>
+<span id="cb7-71"><a href="#cb7-71"></a><span class="co"># Simulate X that exceeds PfPR(A=1) and maximum PfPR</span></span>
+<span id="cb7-72"><a href="#cb7-72"></a>X =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="fl">0.05</span>, <span class="fl">0.35</span>, <span class="fl">0.01</span>)</span>
+<span id="cb7-73"><a href="#cb7-73"></a>X =<span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span><span class="op">*</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Trig">sin</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(X), <span class="dt">length.out =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(X))))<span class="op">*</span>X</span>
+<span id="cb7-74"><a href="#cb7-74"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(X, <span class="dt">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb7-75"><a href="#cb7-75"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/abline">abline</a></span>(<span class="dt">h =</span> max<span class="op">$</span>X, <span class="dt">col =</span> <span class="st">"red"</span>)</span></code></pre></div>
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>eqAR =<span class="st"> </span><span class="kw"><a href="../reference/PR2AReq.html">PR2AReq</a></span>(X, PAR, makeBdrugs)</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; [1] "max A: 0.468; max X: 0.326"</span></span>
@@ -943,6 +949,13 @@ C_2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;1&amp;0\\
 <span id="cb15-68"><a href="#cb15-68"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/legend">legend</a></span>(<span class="st">"topleft"</span>, <span class="dt">legend =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Steady"</span>, <span class="st">"Forward"</span>), <span class="dt">lty =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="PR2AR_Primer_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
+<div id="dynamic-treatment-rates-and-generic-solution-to-exposure-lags" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dynamic-treatment-rates-and-generic-solution-to-exposure-lags" class="anchor"></a>Dynamic Treatment Rates and Generic Solution to Exposure Lags</h2>
+<p>Rather than forcing treatment rates to be static throughout the simulation, we would rather be able to supply a vector of treatment rates with equal length to input PfPR. This extra layer of complication means that matrices <span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> are no longer time invariant and must be recalculated at each time step. Furthermore, forward simulation in the presence of an exposure-based lag requires the multiple</p>
+<p><span class="math display">\[D Y_{t+2} = X_{t+2} = D B_{t+1} B_{t} Y_t = D(A_{t+1}W_{t+1} + V_{t+1})(A_t W_t + V_t) Y_t = D(A_t A_{t+1} W_{t+1}W_t + A_{t+1} W_{t+1} V_t + A_t V_{t+1} W_t + V_{t+1}V_t) Y_t\]</span></p>
+<p><span class="math display">\[ A_t | \ell = \frac{X_{t+1 + \ell} - D \prod_{i = 0}^{\ell}(V_{t + i}) Y_t}  {D \prod_{i = 0}^{\ell - 1}(V_{t + i}) W_t Y_t}\]</span> where <span class="math inline">\(\ell\)</span> is the length of the lag in time steps.</p>
+</div>
 <div id="heterogeneity-in-attack-rates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#heterogeneity-in-attack-rates" class="anchor"></a>Heterogeneity in Attack-Rates</h2>
@@ -969,6 +982,7 @@ C_2&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;0&amp;1&amp;0\\
       <li><a href="#age-of-infection-aoi-and-overwriting-superinfection">Age of Infection (AoI) and Overwriting Superinfection</a></li>
       <li><a href="#aoi-forward-simulation">AoI Forward Simulation</a></li>
       <li><a href="#combine-aoi-with-overwriting-superinfection-and-drugs">Combine AoI with Overwriting Superinfection and Drugs</a></li>
+      <li><a href="#dynamic-treatment-rates-and-generic-solution-to-exposure-lags">Dynamic Treatment Rates and Generic Solution to Exposure Lags</a></li>
       <li><a href="#heterogeneity-in-attack-rates">Heterogeneity in Attack-Rates</a></li>
       <li><a href="#heterogeneity-in-treatment-habits">Heterogeneity in Treatment Habits</a></li>
       </ul>

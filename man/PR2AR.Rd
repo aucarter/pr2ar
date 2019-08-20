@@ -4,7 +4,8 @@
 \alias{PR2AR}
 \title{Master function for converting prevalence rates into attack-rates}
 \usage{
-PR2AR(X, Tx, PAR, eq = F, showMessages = F, cpp = T)
+PR2AR(X, Tx, PAR, Xinterval = 365, eq = F, showMessages = F,
+  cpp = T)
 }
 \arguments{
 \item{X}{A vector of prevalence rates}
@@ -12,6 +13,8 @@ PR2AR(X, Tx, PAR, eq = F, showMessages = F, cpp = T)
 \item{Tx}{A vector of case-management rates}
 
 \item{PAR}{A set of parameters for the mechanistic model of malaria}
+
+\item{Xinterval}{An integer with the number of days between PR observations}
 
 \item{eq}{Toggle for whether to calculate all attack-rates at equilibrium or
 to only calculate the initial states at equilibrium and simulate forward}

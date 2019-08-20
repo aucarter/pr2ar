@@ -1,7 +1,7 @@
 test_that("Prevalence generated from a specific attack-rate can be recovered", {
     n = 20
     Bfn = makeBdrugs_age
-    PAR = list(In = 5, Cn = 2, Q = 0.95)
+    PAR = list(In = 5, Cn = 2, Q = 0.95, dt = 10)
     # Make up attack-rate and treatment rate
     AR <- (1 + 0.1*sin(seq(0, 10, length.out = n + 1)))*seq(0.05, 0.4, length.out = n + 1)
     Tx <- seq(0.05, 0.3, length.out = n)
@@ -18,8 +18,8 @@ test_that("Prevalence generated from a specific attack-rate can be recovered", {
         Y = B%*%Y
         X = c(X, D%*%Y)
     }
-    AR2 = PR2AR(X, Tx, PAR, cpp = T)
-    AR3 = PR2AR(X, Tx, PAR, cpp = F)
+    AR2 = PR2AR(X, Tx, PAR, Xinterval = 365, cpp = T)
+    AR3 = PR2AR(X, Tx, PAR, Xinterval = 365, cpp = F)
     expect_lt(sum(head(AR[-1], -1) - AR2), 0.0001, label = "C++ version")
     expect_lt(sum(head(AR[-1], -1) - AR3), 0.0001, label = "R version")
 })
