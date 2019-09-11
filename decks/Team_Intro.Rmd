@@ -1,0 +1,35 @@
+---
+title: "A generic approach to mapping attack-rates from PfPR estimates"
+author: "Austin Carter"
+date: "9/3/2019"
+output:
+  beamer_presentation:
+colortheme: "rose"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Outline
+
+- Motivation
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+### Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+

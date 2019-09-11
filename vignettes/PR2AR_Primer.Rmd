@@ -680,14 +680,14 @@ legend("topleft", legend = c("Steady", "Forward"), lty = 1:2)
 
 \begin{equation} \begin{array}{rl}
 S_{t+1} & = \left( 1 -\delta \right) \left[ (1-A_t) S_t  + \sum_i (1-A_t)(1-P_i) I_{i,t} +  C_{2,t}\right]  \\ 
-E_{0, t+1} &= \left( 1 -\delta \right) A_t \left[ S_t + \sum_i (1-P_i)(1-\rho_i)I_{i,t} \right] \\ 
-E_{1,t+1} &=  \left( 1 -\delta \right) A_t \left[E_{0,t} + \sum_{i=1}^n (1-\rho_i) E_{i,t}) \right] \\ 
-E_{i,t+1} &=  \left( 1 -\delta \right) A_t P_{i-1} I_{i-1,t} \\
-E_{n,t+1} &=  \left( 1 -\delta \right) A_t P_{i-1} (I_{n-1,t} + I_{n,t}) \\
-I_{1,t+1} &=  \left( 1 -\delta \right) (1-A_t) \sum_{i=1}^n (1-\rho_i) E_{i,t}\\ 
-I_{i,t+1} &=  \left( 1 -\delta \right) (1-A_t) P_{i-1, t} I_{i-1,t} \\ 
-I_{n,t+1} &=  \left( 1 -\delta \right) (1-A_t) \left( P_{n-1, t} I_{n-1,t} +  P_{n, t} I_{n,t} \right) \\ 
-C_{1,t+1} & = (1-\delta) \sum_i \left( \rho_i E_{i, t} + A_t \rho_i I_{i, t}\right)  + \delta \\ 
+E_{0, t+1} &= \left( 1 -\delta \right) A_t \left[ S_t + \sum_i (1-P_i)(1-\rho_{i,t})I_{i,t} \right] \\ 
+E_{1,t+1} &=  \left( 1 -\delta \right) A_t \left[E_{0,t} + \sum_{i=1}^n (1-\rho_{i,t}) E_{i,t}) \right] \\ 
+E_{i,t+1} &=  \left( 1 -\delta \right) A_t P_{i-1} (1 - \rho_{i,t}) I_{i-1,t} \\
+E_{n,t+1} &=  \left( 1 -\delta \right) A_t P_{i-1} ((1 - \rho_{n-1}) I_{n-1,t} + (1 - \rho_{n}) I_{n,t}) \\
+I_{1,t+1} &=  \left( 1 -\delta \right) (1-A_t) \sum_{i=1}^n (1-\rho_{i,t}) E_{i,t}\\ 
+I_{i,t+1} &=  \left( 1 -\delta \right) (1-A_t) P_{i-1, t} (1 - \rho_{i,t}) I_{i-1,t} \\ 
+I_{n,t+1} &=  \left( 1 -\delta \right) (1-A_t) \left( P_{n-1, t} (1 - \rho_{n-1}) I_{n-1,t} +  P_{n, t} (1 - \rho_{n}) I_{n,t} \right) \\ 
+C_{1,t+1} & = (1-\delta) \sum_i  \rho_{i,t} \left(E_{i, t} + I_{i, t}\right)  + \delta \\ 
 C_{2,t+1} & = (1-\delta) C_{1,t} \\ 
 \end{array} \end{equation}
 ...so we write
@@ -696,36 +696,38 @@ And we can write the previous equations as:
 $$ Y_{t+1} = (1-\delta) \left[ A_t W Y_t + V Y_t \right]$$
 where
 $W=$
-$$(1-\delta) \left[ \begin{array}{c||c|cc|cccc|cc}
-&S&E_0&E_i&I_1&I_i&I_m&I_n&C1&C2\\ \hline \hline
-S&-1&0&0&-(1-P_1)&-(1-P_2)&-(1-P_m)&-(1-P_n)&0&0\\
-E_0&1&0&0&(1-P_1)(1-\rho_1)&(1-P_i)(1-\rho_i)&(1-P_m)(1-\rho_m)&(1-P_n)(1-\rho_n)&0&0\\
-E_1&0&1&(1-\rho_i)&0&0&0&0&0&0\\
-E_2&0&0&0&P_1(1-\rho_1)&0&0&0&0&0\\
-E_3&0&0&0&0&P_2 (1-\rho_2)&0&0&0&0\\
-E_n&0&0&0&0&0&P_m (1-\rho_m)&P_n  (1-\rho_n)&0&0\\
-I_1&0&-1&-(1-\rho_i)&0&0&0&0&0&0\\
-I_2&0&0&0&-P_1&0&0&0&0&0\\
-I_3&0&0&0&0&-P_2&0&0&0&0\\
-I_n&0&0&0&0&0&-P_m&-P_n&0&0\\
-C1&0&0&0&\rho_1&\rho_2&\rho_m&\rho_n&0&0\\
-C2&0&0&0&0&0&0&0&0&0\\
+$$(1-\delta) \left[ \begin{array}{c||c|cc|ccccc|cc}
+&S&E_0&E_i&I_1&I_2&\dots&I_{n-1}&I_n&C1&C2\\ \hline \hline
+S&-1&0&0&-(1-P_1)&-(1-P_2)&\dots&-(1-P_{n-1})&-(1-P_n)&0&0\\
+E_0&1&0&0&(1-P_1)(1-\rho_1)&(1-P_2)(1-\rho_{2,t})&\dots&(1-P_{n-1})(1-\rho_{n-1, t})&(1-P_n)(1-\rho_{n,t})&0&0\\
+E_1&0&1&(1-\rho_{i,t})&0&0&\dots&0&0&0&0\\
+E_2&0&0&0&P_1(1-\rho_1)&0&\dots&0&0&0&0\\
+E_3&0&0&0&0&P_2 (1-\rho_{2, t})&\dots&0&0&0&0\\
+\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots&\vdots&\vdots&\vdots&\vdots\\
+E_n&0&0&0&0&0&\dots&P_{n-1} (1-\rho_{n-1})&P_n  (1-\rho_n)&0&0\\
+I_1&0&-1&-(1-\rho_{i,t})&0&0&\dots&0&0&0&0\\
+I_2&0&0&0&-P_1&0&\dots&0&0&0&0\\
+I_3&0&0&0&0&-P_i&\dots&0&0&0&0\\
+\vdots&\vdots&\vdots&\vdots&\vdots&\vdots&\ddots&\vdots&\vdots&\vdots&\vdots\\
+I_n&0&0&0&0&0&\dots&-P_{n-1}&-P_n&0&0\\
+C1&0&0&0&\rho_1&\rho_i&\dots&\rho_{n-1}&\rho_n&0&0\\
+C2&0&0&0&0&0&\dots&0&0&0&0\\
 \end{array} \right]$$
 
 $V=$
 $$(1-\delta) \left[ \begin{array}{c||c|cccc|cccc|cc}
-&S&E_0&E_1&E_2&E_n&I_1&I_2&I_m&I_n&C_1&C_2 \\ \hline \hline
-S&1&0&0&0&0&1-P_1&1-P_2&1-P_m&1-P_n&0&1\\ \hline
+&S&E_0&E_1&E_2&E_n&I_1&I_i&I_{n-1}&I_n&C_1&C_i \\ \hline \hline
+S&1&0&0&0&0&1-P_1&1-P_i&1-P_{n-1}&1-P_n&0&1\\ \hline
 E_0&0&0&0&0&0&0&0&0&0&0&0 \\
 E_1&0&0&0&0&0&0&0&0&0&0&0 \\
 E_2&0&0&0&0&0&0&0&0&0&0&0 \\
 E_3&0&0&0&0&0&0&0&0&0&0&0 \\
 E_n&0&0&0&0&0&0&0&0&0&0&0 \\ \hline
-I_1&0&1&1-\rho_1&1-\rho_2&1-\rho_n&0&0&0&0&0&0 \\
-I_2&0&0&0&0&0&P_1&0&0&0&0&0 \\
-I_3&0&0&0&0&0&0&P_2&0&0&0&0 \\
-I_n&0&0&0&0&0&0&0&P_m&P_n&0&0 \\ \hline
-C_1&0&0&\rho_1&\rho_2&\rho_n&0&0&0&0&0&0\ \\
+I_1&0&1&1-\rho_1&1-\rho_i&1-\rho_n&0&0&0&0&0&0 \\
+I_i&0&0&0&0&0&P_1&0&0&0&0&0 \\
+I_3&0&0&0&0&0&0&P_i&0&0&0&0 \\
+I_n&0&0&0&0&0&0&0&P_{n-1}&P_n&0&0 \\ \hline
+C_1&0&0&\rho_1&\rho_i&\rho_n&0&0&0&0&0&0\ \\
 C_2&0&0&0&0&0&0&0&0&0&1&0\\
 \end{array} \right] + \left[
  \begin{array}{c} 0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\\delta/(1-\delta)\\0  \end{array} \right]$$
@@ -851,8 +853,4 @@ $$D Y_{t+2} = X_{t+2} = D B_{t+1} B_{t} Y_t = D(A_{t+1}W_{t+1} + V_{t+1})(A_t W_
 $$ A_t | \ell = \frac{X_{t+1 + \ell} - D \prod_{i = 0}^{\ell}(V_{t + i}) Y_t}  {D \prod_{i = 0}^{\ell - 1}(V_{t + i}) W_t Y_t}$$
 where $\ell$ is the length of the lag in time steps.
 
-## Heterogeneity in Attack-Rates
-
-
-## Heterogeneity in Treatment Habits
 
